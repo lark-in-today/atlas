@@ -1,34 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:atlas/pages/home.dart';
+import 'package:atlas/pages/group.dart';
+import 'package:atlas/pages/me.dart';
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
+class TabNavigator extends StatefulWidget {
+  TabNavigator({Key key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _TabNavigatorState createState() => _TabNavigatorState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _TabNavigatorState extends State<TabNavigator> {
+  int _currentIndex = 0;
 
+  final List<Widget> _children = [
+    Home(),
+    Group(),
+    Me(),
+  ];
+
+  void onTapped(int index) {
+    setState(() {
+        _currentIndex = index;
+    });
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('atlas'),
       ),
+      body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0, // this will be set when a new tab is tapped
+        onTap: onTapped,
+        currentIndex: _currentIndex,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
         items: [
           BottomNavigationBarItem(
-            icon: new Icon(Icons.home),
-            title: new Text('Home'),
+            icon: Icon(Icons.assignment),
+            title: Text(''),
           ),
           BottomNavigationBarItem(
-            icon: new Icon(Icons.mail),
-            title: new Text('Messages'),
+            icon: Icon(Icons.group),
+            title: Text(''),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            title: Text('Profile')
+            title: Text('')
           )
         ],
       ),
