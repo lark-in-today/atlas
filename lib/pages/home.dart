@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:atlas/components/x.dart';
 
 class Home extends StatefulWidget {
   Home({Key key}) : super(key: key);
@@ -22,17 +23,8 @@ class _Home extends State<Home> {
         itemCount: entries.length,
         itemBuilder: (BuildContext context, int index) {
           return Container(
-            child:  Text("${entries[index]}"),
-            margin: EdgeInsets.symmetric(vertical: 8.0),
-            padding: EdgeInsets.all(15.0),
-            decoration: BoxDecoration(
-              color: Color(0xFFf9f9f9),
-              border: Border.all(
-                color: Color(0xffa2a2a2),
-                width: 0.3,
-              ),
-              borderRadius: BorderRadius.circular(5.0)
-            )
+            child: card('${entries[index]}'),
+            margin: EdgeInsets.symmetric(vertical: 6.0),
           );
         },
       ),

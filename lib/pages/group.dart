@@ -1,37 +1,24 @@
 import 'package:flutter/material.dart';
 
 Widget line(String title) {
-  return Container(
-    padding: EdgeInsets.all(15.0),
-    child: Text(title),
-    decoration: BoxDecoration(
-      color: Color(0xFFf9f9f9),
-      border: Border.all(
-        color: Color(0xffa2a2a2),
-        width: 0.3,
-      ),
-      borderRadius: BorderRadius.circular(5.0)
+  return Card(
+    child: ListTile(
+      title: Text(title),
+      dense: true
     )
   );
 }
 
 Widget contactList(List<String> entries) {
   return ListView.builder(
-    padding: EdgeInsets.only(top: 20.0),
+    padding: EdgeInsets.only(top: 10.0),
     itemCount: entries.length,
     itemBuilder: (BuildContext context, int index) {
-      return Container(
-        child:  Text("${entries[index]}"),
-        margin: EdgeInsets.symmetric(vertical: 3.0),
-        padding: EdgeInsets.all(15.0),
-        decoration: BoxDecoration(
-          color: Color(0xFFf9f9f9),
-          border: Border.all(
-            color: Color(0xffa2a2a2),
-            width: 0.3,
-          ),
-          borderRadius: BorderRadius.circular(5.0)
-        )
+      return Card(
+        child: ListTile(
+          title: Text("${entries[index]}"),
+          dense: true,
+        ),
       );
     },
   );
