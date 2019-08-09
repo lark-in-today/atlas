@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 
-Widget line(String title) {
+Widget line(String title, BuildContext context) {
   return Card(
     child: ListTile(
       title: Text(
         title,
-        style: TextStyle(
-          fontSize: 14.0,
-        ),
+        style: TextStyle(fontSize: 14.0),
       ),
-      dense: true
+      trailing: Icon(Icons.chevron_right),
+      dense: true,
+      enabled: true,
+      onTap: () {
+        Navigator.pushNamed(context, '/groups');
+      }
     )
   );
 }
@@ -34,14 +37,14 @@ Widget contactList(List<String> entries) {
   );
 }
 
-class Group extends StatefulWidget {
-  Group({Key key}) : super(key: key);
+class Contacts extends StatefulWidget {
+  Contacts({Key key}) : super(key: key);
 
   @override
-  _Group createState() => _Group();
+  _Contacts createState() => _Contacts();
 }
 
-class _Group extends State<Group> {
+class _Contacts extends State<Contacts> {
   final List<String> contacts = <String>[
     'David Bowie', 'Iggy Pop', 'Lou Reed'
   ];
@@ -52,7 +55,7 @@ class _Group extends State<Group> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          line('切换团队'),
+          line('切换团队', context),
           Expanded(child: contactList(contacts))
         ]
       )
