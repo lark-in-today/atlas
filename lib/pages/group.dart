@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 Widget line(String title) {
   return Card(
     child: ListTile(
-      title: Text(title),
+      title: Text(
+        title,
+        style: TextStyle(
+          fontSize: 14.0,
+        ),
+      ),
       dense: true
     )
   );
@@ -16,7 +21,12 @@ Widget contactList(List<String> entries) {
     itemBuilder: (BuildContext context, int index) {
       return Card(
         child: ListTile(
-          title: Text("${entries[index]}"),
+          title: Text(
+            "${entries[index]}",
+            style: TextStyle(
+              fontSize: 14.0,
+            ),
+          ),
           dense: true,
         ),
       );
