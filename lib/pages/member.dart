@@ -16,15 +16,15 @@ Widget settings(List<String> entries) {
 class Member extends StatefulWidget {
   Member({Key key}) : super(key: key);
 
+  final List<String> settingList = <String>[
+    '头像', '昵称', '手机号', '邮箱'
+  ];
+  
   @override
   _Member createState() => _Member();
 }
 
 class _Member extends State<Member> {
-  final List<String> settingList = <String>[
-    '头像', '昵称', '手机号', '邮箱'
-  ];
-  
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -38,7 +38,7 @@ class _Member extends State<Member> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Expanded(child: settings(settingList))
+            Expanded(child: settings(widget.settingList))
           ]
         )
       )

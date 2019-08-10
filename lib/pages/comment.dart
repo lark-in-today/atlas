@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:atlas/navigations/args.dart';
 
-class Modify extends StatefulWidget {
-  final String title;
-  Modify({Key key, this.title}) : super(key: key);
-  
+class Comment extends StatefulWidget {
+  Comment({Key key}) : super(key: key);
+
   @override
-  _Modify createState() => _Modify();
+  _Comment createState() => _Comment();
 }
 
-class _Modify extends State<Modify> {
+class _Comment extends State<Comment> {
+  
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('发布评论'),
         actions: <Widget>[
           Container(
             child: IconButton(
@@ -26,25 +25,24 @@ class _Modify extends State<Modify> {
         ],
       ),
       body: Container(
-        padding: EdgeInsets.all(20.0),
+        padding: EdgeInsets.symmetric(
+          vertical: 20.0,
+          horizontal: 15.0
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: widget.title,
+                labelText: '评论',
               ),
+              minLines: 5,
+              maxLines: 5,
             ),
           ]
         )
       ),
     );
   }
-}
-
-class ModifyArguments {
-  final String title;
-
-  ModifyArguments(this.title);
 }

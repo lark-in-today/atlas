@@ -3,6 +3,7 @@ import 'package:atlas/pages/home.dart';
 import 'package:atlas/pages/contacts.dart';
 import 'package:atlas/pages/me/me.dart';
 
+// configs
 List<Widget> actions(int index, BuildContext context) {
   if (index == 0) {
     return [
@@ -27,6 +28,15 @@ List<Widget> actions(int index, BuildContext context) {
   }
 }
 
+List<String> titles = [
+    '话题', '成员', '我的'
+];
+
+List<Widget> children = [
+    Home(), Contacts(), Me(),
+];
+
+// TabNavigator
 class TabNavigator extends StatefulWidget {
   TabNavigator({Key key}) : super(key: key);
 
@@ -36,15 +46,7 @@ class TabNavigator extends StatefulWidget {
 
 class _TabNavigatorState extends State<TabNavigator> {
   int _currentIndex = 0;
-
-  final List<String> _title = [
-    '话题', '成员', '我的'
-  ];
   
-  final List<Widget> _children = [
-    Home(), Contacts(), Me(),
-  ];
-
   void onTapped(int index) {
     setState(() {
         _currentIndex = index;
@@ -56,10 +58,10 @@ class _TabNavigatorState extends State<TabNavigator> {
     return Scaffold(
       appBar: AppBar(
         leading: null,
-        title: Text('${_title[_currentIndex]}'),
+        title: Text('${titles[_currentIndex]}'),
         actions: actions(_currentIndex, context),
       ),
-      body: _children[_currentIndex],
+      body: children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         onTap: onTapped,
         currentIndex: _currentIndex,

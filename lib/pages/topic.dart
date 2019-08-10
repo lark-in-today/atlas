@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 
-
-
-class GroupInfo extends StatefulWidget {
-  GroupInfo({Key key}) : super(key: key);
+class Topic extends StatefulWidget {
+  Topic({Key key}) : super(key: key);
 
   @override
-  _GroupInfo createState() => _GroupInfo();
+  _Topic createState() => _Topic();
 }
 
-class _GroupInfo extends State<GroupInfo> {
+class _Topic extends State<Topic> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('团队信息'),
+        title: Text('话题'),
       ),
       body: Container(
         padding: EdgeInsets.symmetric(
@@ -21,12 +19,11 @@ class _GroupInfo extends State<GroupInfo> {
           horizontal: 10.0
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Card(
               child: ListTile(
                 title: const Text(
-                  'The Velvet Goldmine',
+                  '这里是标题',
                   style: TextStyle(
                     fontSize: 14.0
                   ),
@@ -39,24 +36,30 @@ class _GroupInfo extends State<GroupInfo> {
                 height: 100,
                 padding: EdgeInsets.all(20.0),
                 child: Center(
-                  child: Text('这里是团队简介'),
+                  child: Text('这里是一些评论'),
                 )
               ),
             ),
             Divider(),
-            Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: 5.0
-              ),
-              child: RaisedButton(
-                onPressed: () {
-                  Navigator.pop(context);
+            GestureDetector(             
+              child: InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, '/comment');
                 },
-                child: const Text(
-                  '退出团队',
-                  style: TextStyle(fontSize: 20)
+                child: Container(
+                  margin: EdgeInsets.only(top: 3.0),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 8.0
+                  ),
+                  child: Text(
+                    '发布新评论',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColor
+                    )
+                  ),
                 ),
-              ),
+              )
             )
           ]
         )

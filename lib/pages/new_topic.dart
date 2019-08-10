@@ -13,6 +13,16 @@ class _NewTopic extends State<NewTopic> {
     return Scaffold(
       appBar: AppBar(
         title: Text('新建话题'),
+        actions: <Widget>[
+          Container(
+            child: IconButton(
+              icon: Icon(Icons.check),
+              onPressed: () {
+                Navigator.pop(context);
+              }
+            ),
+          )
+        ],
       ),
       body: Container(
         padding: EdgeInsets.symmetric(
@@ -38,16 +48,6 @@ class _NewTopic extends State<NewTopic> {
               ),
               minLines: 5,
               maxLines: 5,
-            ),
-            Divider(),
-            RaisedButton(
-              onPressed: () {
-                Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
-              },
-              child: const Text(
-                '发布话题',
-                style: TextStyle(fontSize: 20)
-              ),
             ),
           ]
         )

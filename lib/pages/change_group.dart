@@ -16,9 +16,7 @@ Widget contactList(List<String> entries) {
           dense: true,
           trailing: null,
           enabled: true,
-          onTap: () {
-            Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
-          }
+          onTap: () { Navigator.pop(context); }
         ),
       );
     },

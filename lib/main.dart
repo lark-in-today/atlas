@@ -5,6 +5,8 @@ import 'package:atlas/pages/change_group.dart';
 import 'package:atlas/pages/new_topic.dart';
 import 'package:atlas/pages/join_group.dart';
 import 'package:atlas/pages/group_info.dart';
+import 'package:atlas/pages/topic.dart';
+import 'package:atlas/pages/comment.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,6 +21,8 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => TabNavigator(),
+        '/topic': (context) => Topic(),
+        '/comment': (context) => Comment(),
         '/change_group': (context) => ChangeGroup(),
         '/new_topic': (context) => NewTopic(),
         '/join_group': (context) => JoinGroup(),
