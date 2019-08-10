@@ -33,7 +33,7 @@ Widget contactList(List<String> entries) {
           dense: true,
           enabled: true,
           onTap: () {
-            Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+            Navigator.pushNamed(context, '/member');
           }
         ),
       );

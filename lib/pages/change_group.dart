@@ -17,7 +17,7 @@ Widget contactList(List<String> entries) {
           trailing: null,
           enabled: true,
           onTap: () {
-            Navigator.pushReplacementNamed(context, '/');
+            Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
           }
         ),
       );

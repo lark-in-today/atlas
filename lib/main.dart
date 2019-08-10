@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:atlas/navigations/tabbar.dart';
+import 'package:atlas/pages/member.dart';
 import 'package:atlas/pages/change_group.dart';
 import 'package:atlas/pages/new_topic.dart';
 import 'package:atlas/pages/join_group.dart';
-import 'package:atlas/pages/member.dart';
 import 'package:atlas/pages/group_info.dart';
 
 void main() => runApp(MyApp());

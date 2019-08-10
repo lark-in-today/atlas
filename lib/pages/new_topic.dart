@@ -1,27 +1,5 @@
 import 'package:flutter/material.dart';
 
-Widget contactList(List<String> entries) {
-  return ListView.builder(
-    padding: EdgeInsets.only(top: 10.0),
-    itemCount: entries.length,
-    itemBuilder: (BuildContext context, int index) {
-      return Card(
-        child: ListTile(
-          title: Text(
-            "${entries[index]}",
-            style: TextStyle(
-              fontSize: 14.0,
-            ),
-          ),
-          dense: true,
-          trailing: null,
-          enabled: true,
-        ),
-      );
-    },
-  );
-}
-
 class NewTopic extends StatefulWidget {
   NewTopic({Key key}) : super(key: key);
 
@@ -30,10 +8,6 @@ class NewTopic extends StatefulWidget {
 }
 
 class _NewTopic extends State<NewTopic> {
-  final List<String> contacts = <String>[
-    'The Beatles',
-    'Pink Floyd', 'King Crimson', 'Resistance'
-  ];
   
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +41,9 @@ class _NewTopic extends State<NewTopic> {
             ),
             Divider(),
             RaisedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+              },
               child: const Text(
                 '发布话题',
                 style: TextStyle(fontSize: 20)

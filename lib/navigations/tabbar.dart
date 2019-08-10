@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:atlas/pages/home.dart';
 import 'package:atlas/pages/contacts.dart';
-import 'package:atlas/pages/me.dart';
+import 'package:atlas/pages/me/me.dart';
 
 List<Widget> actions(int index, BuildContext context) {
   if (index == 0) {
@@ -58,7 +58,6 @@ class _TabNavigatorState extends State<TabNavigator> {
         leading: null,
         title: Text('${_title[_currentIndex]}'),
         actions: actions(_currentIndex, context),
-        automaticallyImplyLeading: false,
       ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
