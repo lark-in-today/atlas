@@ -14,21 +14,22 @@ Widget contactList(List<String> entries) {
             ),
           ),
           dense: true,
-          trailing: null
+          trailing: null,
+          enabled: true,
         ),
       );
     },
   );
 }
 
-class Groups extends StatefulWidget {
-  Groups({Key key}) : super(key: key);
+class JoinGroup extends StatefulWidget {
+  JoinGroup({Key key}) : super(key: key);
 
   @override
-  _Groups createState() => _Groups();
+  _JoinGroup createState() => _JoinGroup();
 }
 
-class _Groups extends State<Groups> {
+class _JoinGroup extends State<JoinGroup> {
   final List<String> contacts = <String>[
     'The Beatles',
     'Pink Floyd', 'King Crimson', 'Resistance'
@@ -37,7 +38,7 @@ class _Groups extends State<Groups> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('团队列表'),
+        title: Text('加入团队'),
       ),
       body: Container(
         padding: EdgeInsets.all(20.0),

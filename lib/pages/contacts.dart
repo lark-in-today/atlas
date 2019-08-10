@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget line(String title, BuildContext context) {
+Widget line(String title, BuildContext context, String path) {
   return Card(
     child: ListTile(
       title: Text(
@@ -11,7 +11,7 @@ Widget line(String title, BuildContext context) {
       dense: true,
       enabled: true,
       onTap: () {
-        Navigator.pushNamed(context, '/groups');
+        Navigator.pushNamed(context, path);
       }
     )
   );
@@ -31,6 +31,10 @@ Widget contactList(List<String> entries) {
             ),
           ),
           dense: true,
+          enabled: true,
+          onTap: () {
+            Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+          }
         ),
       );
     },
@@ -51,11 +55,15 @@ class _Contacts extends State<Contacts> {
   
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(20.0),
+      padding: EdgeInsets.symmetric(
+        vertical: 20.0,
+        horizontal: 10.0
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          line('切换团队', context),
+          line('切换团队', context, '/change_group'),
+          line('团队信息', context, '/group_info'),
           Expanded(child: contactList(contacts))
         ]
       )

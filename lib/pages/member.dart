@@ -13,26 +13,34 @@ Widget settings(List<String> entries) {
   );
 }
 
-class Me extends StatefulWidget {
-  Me({Key key}) : super(key: key);
+class Member extends StatefulWidget {
+  Member({Key key}) : super(key: key);
 
   @override
-  _Me createState() => _Me();
+  _Member createState() => _Member();
 }
 
-class _Me extends State<Me> {
+class _Member extends State<Member> {
   final List<String> settingList = <String>[
     '头像', '昵称', '手机号', '邮箱'
   ];
   
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(20.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Expanded(child: settings(settingList))
-        ]
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('个人信息'),
+      ),
+      body: Container(
+        padding: EdgeInsets.symmetric(
+          vertical: 20.0,
+          horizontal: 10.0
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Expanded(child: settings(settingList))
+          ]
+        )
       )
     );
   }

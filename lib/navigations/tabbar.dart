@@ -3,6 +3,30 @@ import 'package:atlas/pages/home.dart';
 import 'package:atlas/pages/contacts.dart';
 import 'package:atlas/pages/me.dart';
 
+List<Widget> actions(int index, BuildContext context) {
+  if (index == 0) {
+    return [
+      IconButton(
+        icon: const Icon(Icons.add),
+        onPressed: () {
+          Navigator.pushNamed(context, '/new_topic');
+        },
+      )
+    ];
+  } else if(index == 1) {
+    return [
+      IconButton(
+        icon: const Icon(Icons.add),
+        onPressed: () {
+          Navigator.pushNamed(context, '/join_group');
+        },
+      )
+    ];
+  } else {
+    return [];
+  }
+}
+
 class TabNavigator extends StatefulWidget {
   TabNavigator({Key key}) : super(key: key);
 
@@ -18,9 +42,7 @@ class _TabNavigatorState extends State<TabNavigator> {
   ];
   
   final List<Widget> _children = [
-    Home(),
-    Contacts(),
-    Me(),
+    Home(), Contacts(), Me(),
   ];
 
   void onTapped(int index) {
@@ -33,7 +55,10 @@ class _TabNavigatorState extends State<TabNavigator> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: null,
         title: Text('${_title[_currentIndex]}'),
+        actions: actions(_currentIndex, context),
+        automaticallyImplyLeading: false,
       ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(

@@ -19,7 +19,10 @@ class _Home extends State<Home> {
   Widget build(BuildContext context) {
     return Container(
       child: ListView.builder(
-        padding: EdgeInsets.all(20.0),
+        padding: EdgeInsets.symmetric(
+          vertical: 20.0,
+          horizontal: 10.0
+        ),
         itemCount: entries.length,
         itemBuilder: (BuildContext context, int index) {
           return Container(
