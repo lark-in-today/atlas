@@ -17,7 +17,7 @@ class Member extends StatefulWidget {
   Member({Key key}) : super(key: key);
 
   final List<String> settingList = <String>[
-    '头像', '昵称', '手机号', '邮箱'
+    '昵称', '邮箱'
   ];
   
   @override

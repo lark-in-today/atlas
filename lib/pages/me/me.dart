@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:atlas/api/user.dart';
 import './modify.dart';
-
 
 Widget card(String title, String value, BuildContext context) {
   return Card(
@@ -32,15 +32,18 @@ Widget card(String title, String value, BuildContext context) {
   );
 }
 
-
-Widget settings(List<Map> entries, BuildContext context) {
+Widget settings(List<String> entries, BuildContext context) {
+  List<String> titles = <String>[
+    '昵称', '手机号', '邮箱'
+  ];
+  
   return ListView.builder(
     itemCount: entries.length,
     itemBuilder: (BuildContext context, int index) {
       return Container(
         child: card(
-          "${entries[index]['title']}",
-          "${entries[index]['value']}",
+          "${titles[index]}",
+          "${entries[index]}",
           context
         ),
         margin: EdgeInsets.symmetric(vertical: 6.0),
@@ -52,22 +55,6 @@ Widget settings(List<Map> entries, BuildContext context) {
 class Me extends StatefulWidget {
   Me({Key key}) : super(key: key);
 
-  final List<Map> settingList = <Map>[
-    {
-      'title': '头像',
-      'value': 'x',
-    }, {
-      'title': '昵称',
-      'value': 'noreply'
-    }, {
-      'title': '手机号',
-      'value': '186****3929'
-    }, {
-      'title': '邮箱',
-      'value': 'noreply@cdr.today'
-    }
-  ];
-  
   @override
   _Me createState() => _Me();
 }
@@ -82,7 +69,26 @@ class _Me extends State<Me> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Expanded(child: settings(widget.settingList, context))
+          Expanded(
+            child: FutureBuilder<UserInfo>(
+              future: userInfo(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  List<String> values = [
+                    snapshot.data.name,
+                    snapshot.data.tel,
+                    snapshot.data.mail
+                  ];
+                  return settings(values, context);
+                } else if (snapshot.hasError) {
+                  return Text("${snapshot.error}");
+                }
+
+                return CircularProgressIndicator();
+              }
+            )
+          ),
+          // first child
         ]
       )
     );

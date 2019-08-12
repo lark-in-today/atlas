@@ -19,7 +19,6 @@ class _JoinGroup extends State<JoinGroup> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             TextField(
-              obscureText: true,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: '团队名称',

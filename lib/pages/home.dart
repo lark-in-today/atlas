@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:atlas/api/main.dart';
 
 Widget card(String title, BuildContext context) {
   return Card(
@@ -21,7 +22,6 @@ Widget card(String title, BuildContext context) {
     ),
   );
 }
-
 
 class Home extends StatefulWidget {
   Home({Key key}) : super(key: key);
