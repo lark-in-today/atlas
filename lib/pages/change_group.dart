@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:atlas/api/user.dart';
 
-Widget contactList(List<String> entries) {
+Widget groupList(List<dynamic> entries) {
   return ListView.builder(
     padding: EdgeInsets.only(top: 10.0),
     itemCount: entries.length,
@@ -8,7 +9,7 @@ Widget contactList(List<String> entries) {
       return Card(
         child: ListTile(
           title: Text(
-            "${entries[index]}",
+            "${entries[index]['name']}",
             style: TextStyle(
               fontSize: 14.0,
             ),
@@ -49,7 +50,21 @@ class _ChangeGroup extends State<ChangeGroup> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Expanded(child: contactList(contacts))
+            Expanded(
+              child: FutureBuilder<UserGroup>(
+                future: userGroup(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return groupList(snapshot.data.groups);
+                  } else if (snapshot.hasError) {
+                    return Text("${snapshot.error}");
+                  }
+
+                  return CircularProgressIndicator();
+                }
+              )
+            ),
+            // first child
           ]
         )
       ),

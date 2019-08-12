@@ -34,16 +34,16 @@ class _GroupInfo extends State<GroupInfo> {
               ),
             ),
             Divider(),
-            Card(
-              child: Container(
-                height: 100,
-                padding: EdgeInsets.all(20.0),
-                child: Center(
-                  child: Text('这里是团队简介'),
-                )
-              ),
-            ),
-            Divider(),
+            // Card(
+            //   child: Container(
+            //     height: 100,
+            //     padding: EdgeInsets.all(20.0),
+            //     child: Center(
+            //       child: Text('这里是团队简介'),
+            //     )
+            //   ),
+            // ),
+            // Divider(),
             Container(
               padding: EdgeInsets.symmetric(
                 horizontal: 5.0

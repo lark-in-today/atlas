@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:atlas/api/main.dart';
+import 'package:atlas/api/group.dart';
 
 Widget card(String title, BuildContext context) {
   return Card(
@@ -7,19 +7,32 @@ Widget card(String title, BuildContext context) {
       title: Container(
         child: Text(
           title,
-          style: TextStyle(
-            fontSize: 14
-          )
+          style: TextStyle(fontSize: 14)
         ),
-        padding: EdgeInsets.symmetric(
-          vertical: 6.0,
-        ),
+        padding: EdgeInsets.symmetric(vertical: 6.0),
       ),
       dense: true,
       onTap: () {
         Navigator.pushNamed(context, '/topic');
       }
     ),
+  );
+}
+
+Widget topicList(BuildContext context, List<dynamic> topics) {
+  return ListView.builder(
+    padding: EdgeInsets.symmetric(
+      vertical: 20.0,
+      horizontal: 10.0
+    ),
+    itemCount: topics.length,
+    itemBuilder: (BuildContext context, int index) {
+      return Container(
+        child: card("${topics[index]['title']}", context),
+        
+        margin: EdgeInsets.symmetric(vertical: 6.0),
+      );
+    },
   );
 }
 
@@ -31,27 +44,18 @@ class Home extends StatefulWidget {
 }
 
 class _Home extends State<Home> {
-  final List<String> entries = <String>[
-    'AMD lands Google, Twitter as customers with newest server chip ',
-    'GitHub Actions now supports CI/CD, free for public repositories',
-    'Svalbard is as close as you can get to a place with open borders '
-  ];
-  final List<int> colorCodes = <int>[600, 500, 100];
-
   Widget build(BuildContext context) {
     return Container(
-      child: ListView.builder(
-        padding: EdgeInsets.symmetric(
-          vertical: 20.0,
-          horizontal: 10.0
-        ),
-        itemCount: entries.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-            child: card('${entries[index]}', context),
-            margin: EdgeInsets.symmetric(vertical: 6.0),
-          );
-        },
+      child: FutureBuilder<GroupTopics>(
+        future: groupTopics(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return topicList(context, snapshot.data.topics);
+          } else if (snapshot.hasError) {
+            return Text("${snapshot.error}");
+          }
+          return CircularProgressIndicator();
+        }
       ),
     );
   }

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import './config.dart';
 
-// get user info;
+/* get user info */
 class UserInfo {
   final String tel;
   final String name;
@@ -45,8 +45,8 @@ class UserGroup {
   }
 }
 
-Future<UserInfo> userGroup() async {
-  var res = await http.get(conf['url'] + '/user/0');
+Future<UserGroup> userGroup() async {
+  var res = await http.get(conf['url'] + '/user/0/groups');
 
   if (res.statusCode == 200) {
     return UserGroup.fromJson(json.decode(res.body));
