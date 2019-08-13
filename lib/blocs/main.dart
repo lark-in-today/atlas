@@ -22,22 +22,25 @@ class SimpleBlocDelegate extends BlocDelegate {
   }
 }
 
-
 // theme bloc
 enum ThemeEvent { toggle }
 
 class ThemeBloc extends Bloc<ThemeEvent, ThemeData> {
+  final ThemeData light = ThemeData(
+    scaffoldBackgroundColor: Color(0xffeeeeee),
+  );
+  
   @override
-  ThemeData get initialState => ThemeData.light();
+  ThemeData get initialState => light;
 
   @override
   Stream<ThemeData> mapEventToState(ThemeEvent event) async* {
     switch (event) {
       case ThemeEvent.toggle:
         yield currentState == ThemeData.dark()
-            ? ThemeData.light()
-            : ThemeData.dark();
-        break;
+        ? light
+        : ThemeData.dark();
+      break;
     }
   }
 }

@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:atlas/blocs/user.dart';
 import './config.dart';
+import './model.dart';
 
 /* get user info */
 class UserInfo {

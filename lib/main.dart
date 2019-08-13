@@ -24,17 +24,18 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<ThemeBloc>(
       builder: (context) => ThemeBloc(),
-      child: app(context)
+      child: BlocBuilder<ThemeBloc, ThemeData>(
+        builder: (context, theme) {
+          return app(context, theme);
+        }
+      ) 
     );
   }
 }
 
-Widget app(BuildContext context) {
+Widget app(BuildContext context, ThemeData theme) {
   return MaterialApp(
-    theme: ThemeData(
-      primaryColor: Colors.blue,
-      scaffoldBackgroundColor: Color(0xffeeeeee),
-    ),
+    theme: theme,
     initialRoute: '/',
     routes: {
       '/': (context) => TabNavigator(),
