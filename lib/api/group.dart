@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import './config.dart';
 
-/* get user info */
+/* get group info */
 class GroupInfo {
   final String id;
   final String name;
@@ -30,8 +30,34 @@ Future<GroupInfo> groupInfo() async {
   }
 }
 
+/* get group current */
+class GroupCurrent {
+  final String id;
+  final String name;
+  final List<dynamic> members;
 
-/* get user info */
+  GroupCurrent({this.id, this.name, this.members});
+
+  factory GroupCurrent.fromJson(Map<String, dynamic> json) {
+    return GroupCurrent(
+      id: json['id'],
+      name: json['name'],
+      members: json['members']
+    );
+  }
+}
+
+Future<GroupCurrent> groupCurrent() async {
+  var res = await http.get(conf['url'] + '/group/current');
+
+  if (res.statusCode == 200) {
+    return GroupCurrent.fromJson(json.decode(res.body));
+  } else {
+    throw Exception('Failed to load post');
+  }
+}
+
+/* get group topics */
 class GroupTopics {
   final dynamic topics;
 

@@ -34,7 +34,7 @@ Widget contactList(List<dynamic> entries) {
           dense: true,
           enabled: true,
           onTap: () {
-            Navigator.pushNamed(context, '/member');
+            // Navigator.pushNamed(context, '/member');
           }
         ),
       );

@@ -1,15 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:atlas/api/group.dart';
 
-
-
-class GroupInfo extends StatefulWidget {
-  GroupInfo({Key key}) : super(key: key);
-
-  @override
-  _GroupInfo createState() => _GroupInfo();
+// group title
+Widget _title(String title) {
+  return Card(
+    child: ListTile(
+      title: Text(
+        title,
+        style: TextStyle(fontSize: 14.0),
+      ),
+    ),
+  );
 }
 
-class _GroupInfo extends State<GroupInfo> {
+// exit group
+Widget _exit(BuildContext context) {
+  return Container(
+    padding: EdgeInsets.symmetric(
+      horizontal: 5.0
+    ),
+    child: RaisedButton(
+      onPressed: () {
+        Navigator.pop(context);
+      },
+      child: const Text(
+        '退出团队',
+        style: TextStyle(fontSize: 20)
+      ),
+    ),
+  );
+}
+
+Widget _column(BuildContext context, GroupCurrent data) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: <Widget>[
+      _title(data.name),
+      Divider(),
+      _exit(context)
+    ]
+  );
+}
+
+// main
+class GroupInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -20,45 +54,17 @@ class _GroupInfo extends State<GroupInfo> {
           vertical: 20.0,
           horizontal: 10.0
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Card(
-              child: ListTile(
-                title: const Text(
-                  'The Velvet Goldmine',
-                  style: TextStyle(
-                    fontSize: 14.0
-                  ),
-                ),
-              ),
-            ),
-            Divider(),
-            // Card(
-            //   child: Container(
-            //     height: 100,
-            //     padding: EdgeInsets.all(20.0),
-            //     child: Center(
-            //       child: Text('这里是团队简介'),
-            //     )
-            //   ),
-            // ),
-            // Divider(),
-            Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: 5.0
-              ),
-              child: RaisedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text(
-                  '退出团队',
-                  style: TextStyle(fontSize: 20)
-                ),
-              ),
-            )
-          ]
+        child: FutureBuilder<GroupCurrent>(
+          future: groupCurrent(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return _column(context, snapshot.data);
+            } else if (snapshot.hasError) {
+              return Text("${snapshot.error}");
+            }
+
+            return CircularProgressIndicator();
+          }
         )
       ),
     );
