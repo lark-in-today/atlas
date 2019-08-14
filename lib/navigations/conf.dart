@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:atlas/pages/home.dart';
 import 'package:atlas/pages/contacts.dart';
-import 'package:atlas/pages/me/me.dart';
+import 'package:atlas/pages/mine.dart';
 import 'package:atlas/api/user.dart';
 import 'package:atlas/api/group.dart';
 
@@ -12,7 +12,7 @@ List<Widget> actions(int index, BuildContext context) {
       IconButton(
         icon: const Icon(Icons.add),
         onPressed: () {
-          // Navigator.pushNamed(context, '/new_topic');
+          Navigator.pushNamed(context, '/topic/new_topic');
         },
       )
     ];
@@ -21,7 +21,7 @@ List<Widget> actions(int index, BuildContext context) {
       IconButton(
         icon: const Icon(Icons.add),
         onPressed: () {
-          // Navigator.pushNamed(context, '/join_group');
+          Navigator.pushNamed(context, '/contacts/join_group');
         },
       )
     ];
@@ -91,4 +91,3 @@ Widget tabHome() {
     }
   );
 }
-

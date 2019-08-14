@@ -1,5 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:atlas/api/group.dart';
+
+// main
+class GroupInfoPage extends StatelessWidget {
+  final String name;
+  GroupInfoPage({
+      Key key, this.name
+  }): super(key: key);
+  
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('团队信息'),
+      ),
+      body: Container(
+        padding: EdgeInsets.symmetric(
+          vertical: 20.0,
+          horizontal: 10.0
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            _title(name),
+            Divider(),
+            _exit(context)
+          ]
+        )
+      ),
+    );
+  }
+}
+
 
 // group title
 Widget _title(String title) {
@@ -29,44 +59,4 @@ Widget _exit(BuildContext context) {
       ),
     ),
   );
-}
-
-Widget _column(BuildContext context, GroupCurrent data) {
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.stretch,
-    children: <Widget>[
-      _title(data.name),
-      Divider(),
-      _exit(context)
-    ]
-  );
-}
-
-// main
-class GroupInfo extends StatelessWidget {
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('团队信息'),
-      ),
-      body: Container(
-        padding: EdgeInsets.symmetric(
-          vertical: 20.0,
-          horizontal: 10.0
-        ),
-        child: FutureBuilder<GroupCurrent>(
-          future: groupCurrent(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return _column(context, snapshot.data);
-            } else if (snapshot.hasError) {
-              return Text("${snapshot.error}");
-            }
-
-            return CircularProgressIndicator();
-          }
-        )
-      ),
-    );
-  }
 }

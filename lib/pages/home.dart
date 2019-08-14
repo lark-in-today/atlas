@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:atlas/api/group.dart';
 import 'package:atlas/pages/topic.dart';
+import 'package:atlas/navigations/args.dart';
 
 Widget card(String title, BuildContext context) {
   return Card(
@@ -14,10 +15,10 @@ Widget card(String title, BuildContext context) {
       ),
       dense: true,
       onTap: () {
-        // Navigator.pushNamed(context, '/topic', arguments: TopicArgs(
-        //     title: title,
-        //     id: '000'
-        // ));
+        Navigator.pushNamed(
+          context, '/topic/topic',
+          arguments: TopicArgs(title: title, id: '000')
+        );
       }
     ),
   );

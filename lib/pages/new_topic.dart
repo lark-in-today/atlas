@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:atlas/navigations/args.dart';
 
-class NewTopic extends StatefulWidget {
-  NewTopic({Key key}) : super(key: key);
-
-  @override
-  _NewTopic createState() => _NewTopic();
-}
-
-class _NewTopic extends State<NewTopic> {
-  
+class NewTopic extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

@@ -10,9 +10,7 @@ Widget groupList(List<dynamic> entries) {
         child: ListTile(
           title: Text(
             "${entries[index]['name']}",
-            style: TextStyle(
-              fontSize: 14.0,
-            ),
+            style: TextStyle(fontSize: 14.0),
           ),
           dense: true,
           trailing: null,
@@ -24,18 +22,11 @@ Widget groupList(List<dynamic> entries) {
   );
 }
 
-class ChangeGroup extends StatefulWidget {
-  ChangeGroup({Key key}) : super(key: key);
-
-  @override
-  _ChangeGroup createState() => _ChangeGroup();
-}
-
-class _ChangeGroup extends State<ChangeGroup> {
-  final List<String> contacts = <String>[
-    'The Beatles',
-    'Pink Floyd', 'King Crimson', 'Resistance'
-  ];
+class ChangeGroup extends StatelessWidget {
+  final List<dynamic> groups;
+  ChangeGroup({
+      Key key, @required this.groups
+  }) : super(key: key);
   
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,20 +41,7 @@ class _ChangeGroup extends State<ChangeGroup> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Expanded(
-              child: FutureBuilder<UserGroup>(
-                future: userGroup(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return groupList(snapshot.data.groups);
-                  } else if (snapshot.hasError) {
-                    return Text("${snapshot.error}");
-                  }
-
-                  return CircularProgressIndicator();
-                }
-              )
-            ),
+            Expanded(child: groupList(groups)),
             // first child
           ]
         )

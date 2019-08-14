@@ -33,9 +33,7 @@ Widget contactList(List<dynamic> entries) {
           ),
           dense: true,
           enabled: true,
-          onTap: () {
-            // Navigator.pushNamed(context, '/member');
-          }
+          onTap: () => Navigator.pushNamed(context, '/contacts/member')
         ),
       );
     },
@@ -59,8 +57,8 @@ class Contacts extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          line('切换团队', context, '/change_group'),
-          line('团队信息', context, '/group_info'),
+          line('切换团队', context, '/contacts/change_group'),
+          line('团队信息', context, '/contacts/group_info'),
           Expanded(child: contactList(members))
         ]
       )

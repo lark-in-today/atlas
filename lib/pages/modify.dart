@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:atlas/navigations/args.dart';
 
-class Modify extends StatefulWidget {
+class Modify extends StatelessWidget {
   final String title;
-  Modify({Key key, this.title}) : super(key: key);
   
-  @override
-  _Modify createState() => _Modify();
-}
-
-class _Modify extends State<Modify> {
+  Modify({
+      Key key, @required this.title
+  }) : super(key: key);
+  
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(title),
         actions: <Widget>[
           Container(
             child: IconButton(
@@ -33,7 +30,7 @@ class _Modify extends State<Modify> {
             TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: widget.title,
+                labelText: title,
               ),
             ),
           ]
@@ -41,10 +38,4 @@ class _Modify extends State<Modify> {
       ),
     );
   }
-}
-
-class ModifyArguments {
-  final String title;
-
-  ModifyArguments(this.title);
 }

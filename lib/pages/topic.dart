@@ -1,12 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:atlas/api/topic.dart';
+import 'package:atlas/navigations/args.dart';
 
-// arguments from navigator.
-class TopicArgs {
-  final String title;
+// main
+class Topic extends StatelessWidget {
   final String id;
+  final String title;
+  final List<dynamic> comments;
+
+  Topic({
+      Key key, this.id, this.title, this.comments
+  }) : super(key: key);
   
-  TopicArgs({this.title, this.id});
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('话题'),
+      ),
+      body: Container(
+        padding: EdgeInsets.symmetric(
+          vertical: 20.0,
+          horizontal: 10.0
+        ),
+        child: Column(
+          children: <Widget>[
+            _title(title),
+            Divider(),
+            _comments(comments),
+            Divider(),
+            _comment(context, id)
+          ]
+        )
+      )
+    );
+  }
 }
 
 // topic title
@@ -39,57 +66,15 @@ Widget _comments(List<dynamic> entries) {
   );
 }
 
-
-// body
-Widget _body(BuildContext context, TopicDetail detail) {
-  return Container(
-    padding: EdgeInsets.symmetric(
-      vertical: 20.0,
-      horizontal: 10.0
-    ),
-    child: Column(
-      children: <Widget>[
-        _title(detail.title),
-        Divider(),
-        _comments(detail.comments),
-        Divider(),
-        _comment(context)
-      ]
-    )
-  );
-}
-
-// main
-class Topic extends StatelessWidget {
-  Widget build(BuildContext context) {
-    final TopicArgs args = ModalRoute.of(context).settings.arguments;
-    
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('话题'),
-      ),
-      body: FutureBuilder<TopicDetail>(
-        future: topicDetail(args.id),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return _body(context, snapshot.data);
-          } else if (snapshot.hasError) {
-            return Text("${snapshot.error}");
-          }
-
-          return CircularProgressIndicator();
-        }
-      )
-    );
-  }
-}
-
 // new comment
-Widget _comment(BuildContext context) {
+Widget _comment(BuildContext context, String id) {
   return GestureDetector(             
     child: InkWell(
       onTap: () {
-        Navigator.pushNamed(context, '/comment');
+        Navigator.pushNamed(
+          context, '/topic/topic/comment',
+          arguments: CommentArgs(id: id)
+        );
       },
       child: Container(
         margin: EdgeInsets.only(top: 3.0),

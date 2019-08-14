@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
 
-class JoinGroup extends StatefulWidget {
-  JoinGroup({Key key}) : super(key: key);
-
-  @override
-  _JoinGroup createState() => _JoinGroup();
-}
-
-class _JoinGroup extends State<JoinGroup> {
+class JoinGroup extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
