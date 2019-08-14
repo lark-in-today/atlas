@@ -14,10 +14,10 @@ Widget card(String title, BuildContext context) {
       ),
       dense: true,
       onTap: () {
-        Navigator.pushNamed(context, '/topic', arguments: TopicArgs(
-            title: title,
-            id: '000'
-        ));
+        // Navigator.pushNamed(context, '/topic', arguments: TopicArgs(
+        //     title: title,
+        //     id: '000'
+        // ));
       }
     ),
   );
@@ -41,19 +41,14 @@ Widget topicList(BuildContext context, List<dynamic> topics) {
 }
 
 class Home extends StatelessWidget {
+  final List<dynamic> topics;
+  Home({
+      Key key, @required this.topics
+  }) : super(key: key);
+  
   Widget build(BuildContext context) {
     return Container(
-      child: FutureBuilder<GroupTopics>(
-        future: groupTopics(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return topicList(context, snapshot.data.topics);
-          } else if (snapshot.hasError) {
-            return Text("${snapshot.error}");
-          }
-          return CircularProgressIndicator();
-        }
-      ),
+      child: topicList(context, topics)
     );
   }
 }

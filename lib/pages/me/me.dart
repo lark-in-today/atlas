@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:atlas/api/user.dart';
 import './modify.dart';
 
 Widget card(String title, String value, BuildContext context) {
@@ -21,29 +20,27 @@ Widget card(String title, String value, BuildContext context) {
       ),
       dense: true,
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Modify(title: title)
-          ),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => Modify(title: title)),
+        // );
       }
     ),
   );
 }
 
-Widget settings(List<String> entries, BuildContext context) {
+Widget settings(BuildContext context, List<String> info) {
   List<String> titles = <String>[
     '昵称', '手机号', '邮箱'
   ];
   
   return ListView.builder(
-    itemCount: entries.length,
+    itemCount: info.length,
     itemBuilder: (BuildContext context, int index) {
       return Container(
         child: card(
           "${titles[index]}",
-          "${entries[index]}",
+          "${info[index]}",
           context
         ),
         margin: EdgeInsets.symmetric(vertical: 6.0),
@@ -52,14 +49,14 @@ Widget settings(List<String> entries, BuildContext context) {
   );
 }
 
-class Me extends StatefulWidget {
-  Me({Key key}) : super(key: key);
+class Me extends StatelessWidget {
+  final List<String> info;
 
+  const Me({
+    Key key, @required this.info,
+  }) : super(key: key);
+  
   @override
-  _Me createState() => _Me();
-}
-
-class _Me extends State<Me> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
@@ -69,26 +66,7 @@ class _Me extends State<Me> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Expanded(
-            child: FutureBuilder<UserInfo>(
-              future: userInfo(),
-              builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                  List<String> values = [
-                    snapshot.data.name,
-                    snapshot.data.tel,
-                    snapshot.data.mail
-                  ];
-                  return settings(values, context);
-                } else if (snapshot.hasError) {
-                  return Text("${snapshot.error}");
-                }
-
-                return CircularProgressIndicator();
-              }
-            )
-          ),
-          // first child
+          Expanded(child: settings(context, info)),
         ]
       )
     );

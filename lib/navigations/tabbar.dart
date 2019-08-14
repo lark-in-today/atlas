@@ -1,40 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:atlas/pages/home.dart';
-import 'package:atlas/pages/contacts.dart';
-import 'package:atlas/pages/me/me.dart';
-
-// configs
-List<Widget> actions(int index, BuildContext context) {
-  if (index == 0) {
-    return [
-      IconButton(
-        icon: const Icon(Icons.add),
-        onPressed: () {
-          Navigator.pushNamed(context, '/new_topic');
-        },
-      )
-    ];
-  } else if(index == 1) {
-    return [
-      IconButton(
-        icon: const Icon(Icons.add),
-        onPressed: () {
-          Navigator.pushNamed(context, '/join_group');
-        },
-      )
-    ];
-  } else {
-    return [];
-  }
-}
-
-List<String> titles = [
-    '话题', '成员', '我的'
-];
-
-List<Widget> children = [
-    Home(), Contacts(), Me(),
-];
+import 'package:atlas/navigations/conf.dart';
 
 // TabNavigator
 class TabNavigator extends StatefulWidget {

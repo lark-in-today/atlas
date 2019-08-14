@@ -42,18 +42,14 @@ Widget contactList(List<dynamic> entries) {
   );
 }
 
-class Contacts extends StatefulWidget {
-  Contacts({Key key}) : super(key: key);
+class Contacts extends StatelessWidget {
+  final List<dynamic> members;
+
+  Contacts({
+     Key key, @required this.members
+  }) : super(key: key);
 
   @override
-  _Contacts createState() => _Contacts();
-}
-
-class _Contacts extends State<Contacts> {
-  final List<String> contacts = <String>[
-    'David Bowie', 'Iggy Pop', 'Lou Reed'
-  ];
-  
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
@@ -65,20 +61,7 @@ class _Contacts extends State<Contacts> {
         children: <Widget>[
           line('切换团队', context, '/change_group'),
           line('团队信息', context, '/group_info'),
-          Expanded(
-            child: FutureBuilder<GroupInfo>(
-              future: groupInfo(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return contactList(snapshot.data.members);
-                } else if (snapshot.hasError) {
-                  return Text("${snapshot.error}");
-                }
-
-                return CircularProgressIndicator();
-              }
-            )
-          )
+          Expanded(child: contactList(members))
         ]
       )
     );
