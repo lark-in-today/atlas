@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:atlas/api/group.dart';
+import 'package:atlas/pages/topic.dart';
 
 Widget card(String title, BuildContext context) {
   return Card(
@@ -13,7 +14,10 @@ Widget card(String title, BuildContext context) {
       ),
       dense: true,
       onTap: () {
-        Navigator.pushNamed(context, '/topic');
+        Navigator.pushNamed(context, '/topic', arguments: TopicArgs(
+            title: title,
+            id: '000'
+        ));
       }
     ),
   );
@@ -36,14 +40,7 @@ Widget topicList(BuildContext context, List<dynamic> topics) {
   );
 }
 
-class Home extends StatefulWidget {
-  Home({Key key}) : super(key: key);
-
-  @override
-  _Home createState() => _Home();
-}
-
-class _Home extends State<Home> {
+class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: FutureBuilder<GroupTopics>(

@@ -73,7 +73,7 @@ class _Me extends State<Me> {
             child: FutureBuilder<UserInfo>(
               future: userInfo(),
               builder: (context, snapshot) {
-                if (snapshot.hasData) {
+                  if (snapshot.hasData) {
                   List<String> values = [
                     snapshot.data.name,
                     snapshot.data.tel,
