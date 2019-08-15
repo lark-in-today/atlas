@@ -39,23 +39,29 @@ Future<UserInfo> userInfo(String id) async {
   }
 }
 
-/* get user groups */
+/** Get user groups
+ * @pages: [''] 
+ */
 class UserGroup {
-  final dynamic current;
   final dynamic groups;
 
-  UserGroup({ this.current, this.groups });
+  UserGroup({ this.groups });
 
   factory UserGroup.fromJson(Map<String, dynamic> json) {
     return UserGroup(
-      current: json['current'],
       groups: json['groups']
     );
   }
 }
 
-Future<UserGroup> userGroup() async {
-  var res = await http.get(conf['url'] + '/user/0/groups');
+Future<UserGroup> userGroup(String id) async {
+  String tk = await token();
+  var res = await http.get(
+    conf['url'] + '/user/${id}/groups',
+    headers: {
+      'token': tk
+    }
+  );
 
   if (res.statusCode == 200) {
     return UserGroup.fromJson(json.decode(res.body));

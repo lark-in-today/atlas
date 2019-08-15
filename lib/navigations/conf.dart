@@ -40,7 +40,6 @@ List<Widget> children = [
   tabHome(), tabContacts(), tabMe()
 ];
 
-
 /* network wrappers */
 Widget tabMe() {
   return FutureBuilder<UserInfo>(
@@ -58,8 +57,8 @@ Widget tabMe() {
 }
 
 Widget tabContacts() {
-  return FutureBuilder<GroupInfo>(
-    future: groupInfo(),
+  return FutureBuilder<GroupMembers>(
+    future: groupMembers('_'),
     builder: (context, snapshot) {
       if (snapshot.hasData) {
         List<dynamic> members = snapshot.data.members;
@@ -75,7 +74,7 @@ Widget tabContacts() {
 
 Widget tabHome() {
   return FutureBuilder<GroupTopics>(
-    future: groupTopics(),
+    future: groupTopics('_'),
     builder: (context, snapshot) {
       if (snapshot.hasData) {
         return Home(topics: snapshot.data.topics);

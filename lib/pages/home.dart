@@ -3,25 +3,17 @@ import 'package:atlas/api/group.dart';
 import 'package:atlas/pages/topic.dart';
 import 'package:atlas/navigations/args.dart';
 
-Widget card(String title, BuildContext context) {
-  return Card(
-    child: ListTile(
-      title: Container(
-        child: Text(
-          title,
-          style: TextStyle(fontSize: 14)
-        ),
-        padding: EdgeInsets.symmetric(vertical: 6.0),
-      ),
-      dense: true,
-      onTap: () {
-        Navigator.pushNamed(
-          context, '/topic/topic',
-          arguments: TopicArgs(title: title, id: '000')
-        );
-      }
-    ),
-  );
+class Home extends StatelessWidget {
+  final List<dynamic> topics;
+  Home({
+      Key key, @required this.topics
+  }) : super(key: key);
+  
+  Widget build(BuildContext context) {
+    return Container(
+      child: topicList(context, topics)
+    );
+  }
 }
 
 Widget topicList(BuildContext context, List<dynamic> topics) {
@@ -41,15 +33,24 @@ Widget topicList(BuildContext context, List<dynamic> topics) {
   );
 }
 
-class Home extends StatelessWidget {
-  final List<dynamic> topics;
-  Home({
-      Key key, @required this.topics
-  }) : super(key: key);
-  
-  Widget build(BuildContext context) {
-    return Container(
-      child: topicList(context, topics)
-    );
-  }
+
+Widget card(String title, BuildContext context) {
+  return Card(
+    child: ListTile(
+      title: Container(
+        child: Text(
+          title,
+          style: TextStyle(fontSize: 14)
+        ),
+        padding: EdgeInsets.symmetric(vertical: 6.0),
+      ),
+      dense: true,
+      onTap: () {
+        Navigator.pushNamed(
+          context, '/topic/topic',
+          arguments: TopicArgs(title: title, id: '000')
+        );
+      }
+    ),
+  );
 }

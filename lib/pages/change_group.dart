@@ -1,27 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:atlas/api/user.dart';
 
-Widget groupList(List<dynamic> entries) {
-  return ListView.builder(
-    padding: EdgeInsets.only(top: 10.0),
-    itemCount: entries.length,
-    itemBuilder: (BuildContext context, int index) {
-      return Card(
-        child: ListTile(
-          title: Text(
-            "${entries[index]['name']}",
-            style: TextStyle(fontSize: 14.0),
-          ),
-          dense: true,
-          trailing: null,
-          enabled: true,
-          onTap: () { Navigator.pop(context); }
-        ),
-      );
-    },
-  );
-}
-
 class ChangeGroup extends StatelessWidget {
   final List<dynamic> groups;
   ChangeGroup({
@@ -48,4 +27,25 @@ class ChangeGroup extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget groupList(List<dynamic> entries) {
+  return ListView.builder(
+    padding: EdgeInsets.only(top: 10.0),
+    itemCount: entries.length,
+    itemBuilder: (BuildContext context, int index) {
+      return Card(
+        child: ListTile(
+          title: Text(
+            "${entries[index]['name']}",
+            style: TextStyle(fontSize: 14.0),
+          ),
+          dense: true,
+          trailing: null,
+          enabled: true,
+          onTap: () { Navigator.pop(context); }
+        ),
+      );
+    },
+  );
 }

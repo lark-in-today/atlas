@@ -79,7 +79,7 @@ MaterialPageRoute router(settings) {
     );
   } else if (r == '/contacts/group_info') {
     return MaterialPageRoute(
-      builder: (context) =>  group_info()
+      builder: (context) =>  group_info('_')
     );  
   } else if (r == '/contacts/member') {
     return MaterialPageRoute(

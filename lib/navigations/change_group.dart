@@ -4,7 +4,7 @@ import 'package:atlas/pages/change_group.dart';
 
 Widget change_group() {
   return FutureBuilder<UserGroup>(
-    future: userGroup(),
+    future: userGroup('_'),
     builder: (context, snapshot) {
       if (snapshot.hasData) {
         return ChangeGroup(
