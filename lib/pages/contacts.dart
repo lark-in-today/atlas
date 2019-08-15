@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:atlas/api/group.dart';
+import 'package:atlas/navigations/args.dart';
 
 class Contacts extends StatelessWidget {
-  final List<dynamic> members;
+  final dynamic state;
 
   Contacts({
-     Key key, @required this.members
+     Key key, @required this.state
   }) : super(key: key);
-
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,16 +19,23 @@ class Contacts extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          line('切换团队', context, '/contacts/change_group'),
-          line('团队信息', context, '/contacts/group_info'),
-          Expanded(child: contactList(members))
+          line(
+            context,
+            '切换团队', '/contacts/change_group',
+            GroupInfoArgs(name: state.name)
+          ),
+          line(
+            context, '团队信息', '/contacts/group_info',
+            GroupInfoArgs(name: state.name)
+          ),
+          Expanded(child: contactList(state.members))
         ]
       )
     );
   }
 }
 
-Widget line(String title, BuildContext context, String path) {
+Widget line(BuildContext context, String title, String path, dynamic args) {
   return Card(
     child: ListTile(
       title: Text(
@@ -38,7 +46,7 @@ Widget line(String title, BuildContext context, String path) {
       dense: true,
       enabled: true,
       onTap: () {
-        Navigator.pushNamed(context, path);
+        Navigator.pushNamed(context, path, arguments: args);
       }
     )
   );
@@ -53,9 +61,7 @@ Widget contactList(List<dynamic> entries) {
         child: ListTile(
           title: Text(
             "${entries[index]['name']}",
-            style: TextStyle(
-              fontSize: 14.0,
-            ),
+            style: TextStyle(fontSize: 14.0),
           ),
           dense: true,
           enabled: true,

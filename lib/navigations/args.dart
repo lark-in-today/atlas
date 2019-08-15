@@ -27,3 +27,10 @@ class ChangeGroupArgs {
 
   ChangeGroupArgs({ this.groups });
 }
+
+// pages
+class GroupInfoArgs {
+  final String name;
+
+  GroupInfoArgs({this.name});
+}

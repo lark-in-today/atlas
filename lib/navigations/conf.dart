@@ -8,7 +8,7 @@ import 'package:atlas/api/group.dart';
 // bloc
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:atlas/blocs/topic.dart';
+import 'package:atlas/blocs/group.dart';
 
 /* actions */
 List<Widget> actions(int index, BuildContext context) {
@@ -48,10 +48,13 @@ List<Widget> children = [
 /* network wrappers */
 Widget tabHome() {
   return BlocProvider(
-    builder: (context) => TopicBloc()..dispatch(ChangeGroup()),
-    child: BlocBuilder<TopicBloc, TopicState>(
+    builder: (context) => GroupBloc()..dispatch(
+      ChangeGroup(group: '')
+    ),
+    child: BlocBuilder<GroupBloc, GroupState>(
       builder: (context, state) {
         if (state is CurrentGroup) {
+          print(state.name);
           return Home(topics: state.topics);
         }
       }
@@ -60,18 +63,16 @@ Widget tabHome() {
 }
 
 Widget tabContacts() {
-  return FutureBuilder<GroupMembers>(
-    future: groupMembers(''),
-    builder: (context, snapshot) {
-      if (snapshot.hasData) {
-        List<dynamic> members = snapshot.data.members;
-        return Contacts(members: members);
-      } else if (snapshot.hasError) {
-        return Text("${snapshot.error}");
+  return BlocProvider(
+    builder: (context) => GroupBloc(),
+    child: BlocBuilder<GroupBloc, GroupState>(
+      builder: (context, state) {
+        if (state is CurrentGroup) {
+          print(state.name);
+          return Contacts(state: state);
+        }
       }
-
-      return CircularProgressIndicator();
-    }
+    )
   );
 }
 
