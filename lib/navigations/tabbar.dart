@@ -41,10 +41,10 @@ class _TabNavigatorState extends State<TabNavigator> {
             icon: Icon(Icons.group),
             title: Text(''),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            title: Text('')
-          )
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.person),
+          //   title: Text('')
+          // )
         ],
       ),
     );

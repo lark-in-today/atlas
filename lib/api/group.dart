@@ -22,6 +22,8 @@ class GroupInfo {
 
 Future<GroupInfo> groupInfo(String id) async {
   String tk = await token();
+  if (id == '' && tk == '') { id = '_'; }
+  
   var res = await http.get(
     conf['url'] + '/group/$id',
     headers: {
@@ -55,6 +57,8 @@ class GroupMembers {
 
 Future<GroupMembers> groupMembers(String id) async {
   String tk = await token();
+  if (id == '' && tk == '') { id = '_'; }
+  
   var res = await http.get(
     conf['url'] + '/group/${id}/members',
     headers: {
@@ -87,6 +91,8 @@ class GroupTopics {
 
 Future<GroupTopics> groupTopics(String id) async {
   String tk = await token();
+  if (id == '' && tk == '') { id = '_'; }
+  
   var res = await http.get(
     conf['url'] + '/group/${id}/topics',
     headers: {

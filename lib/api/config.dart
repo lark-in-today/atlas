@@ -13,6 +13,6 @@ Future<String> token() async {
 
 Future<String> currentGroup() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  String tk = prefs.getString('current_group') ?? '_';
-  return tk;
+  String group = prefs.getString('current_group') ?? '_';
+  return group;
 }

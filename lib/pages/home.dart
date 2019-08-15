@@ -25,7 +25,7 @@ Widget topicList(BuildContext context, List<dynamic> topics) {
     itemCount: topics.length,
     itemBuilder: (BuildContext context, int index) {
       return Container(
-        child: card("${topics[index]['title']}", context),
+        child: card(topics[index], context),
         
         margin: EdgeInsets.symmetric(vertical: 6.0),
       );
@@ -33,13 +33,12 @@ Widget topicList(BuildContext context, List<dynamic> topics) {
   );
 }
 
-
-Widget card(String title, BuildContext context) {
+Widget card(TopicArgs topic, BuildContext context) {
   return Card(
     child: ListTile(
       title: Container(
         child: Text(
-          title,
+          topic.title,
           style: TextStyle(fontSize: 14)
         ),
         padding: EdgeInsets.symmetric(vertical: 6.0),
@@ -48,7 +47,7 @@ Widget card(String title, BuildContext context) {
       onTap: () {
         Navigator.pushNamed(
           context, '/topic/topic',
-          arguments: TopicArgs(title: title, id: '000')
+          arguments: TopicArgs(title: topic.title, id: topic.id)
         );
       }
     ),

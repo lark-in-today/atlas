@@ -25,8 +25,10 @@ class UserInfo {
 
 Future<UserInfo> userInfo(String id) async {
   String tk = await token();
+  if (id == '' && tk == '') { id = '_'; }
+
   var res = await http.get(
-    conf['url'] + '/user/$id',
+    conf['url'] + '/user/${id}',
     headers: {
       'token': tk
     }
@@ -56,6 +58,8 @@ class UserGroup {
 
 Future<UserGroup> userGroup(String id) async {
   String tk = await token();
+  if (id == '' && tk == '') { id = '_'; }
+
   var res = await http.get(
     conf['url'] + '/user/${id}/groups',
     headers: {
