@@ -8,7 +8,7 @@ enum UserInfoEvent { update }
 
 class UserInfoBloc extends Bloc<UserInfoEvent, Future<UserInfo>> {
   @override
-  Future<UserInfo> get initialState => userInfo();
+  Future<UserInfo> get initialState => userInfo('_');
 
   @override
   Stream<Future<UserInfo>> mapEventToState(UserInfoEvent event) async* {

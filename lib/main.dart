@@ -17,6 +17,7 @@ import 'package:atlas/navigations/change_group.dart';
 import 'package:atlas/navigations/group_info.dart';
 import 'package:atlas/navigations/tabbar.dart';
 
+/* app */
 void main() {
   BlocSupervisor.delegate = SimpleBlocDelegate();
   runApp(App());
@@ -45,7 +46,7 @@ Widget app(BuildContext context, ThemeData theme) {
   );
 }
 
-// app router
+/* app router */
 MaterialPageRoute router(settings) {
   String r = settings.name;
   

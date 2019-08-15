@@ -1,8 +1,9 @@
 // page modify
 class ModifyArgs {
   final String title;
+  final String index;
 
-  ModifyArgs({ this.title });
+  ModifyArgs({ this.title, this.index });
 }
 
 // page topic

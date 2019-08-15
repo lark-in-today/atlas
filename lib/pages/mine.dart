@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:atlas/navigations/args.dart';
 
 class Me extends StatelessWidget {
-  final List<String> info;
+  final dynamic info;
 
   const Me({
     Key key, @required this.info,
@@ -26,12 +26,12 @@ class Me extends StatelessWidget {
 }
 
 
-Widget card(String title, String value, BuildContext context) {
+Widget card(ModifyArgs args, String value, BuildContext context) {
   return Card(
     child: ListTile(
       title: Container(
         child: Text(
-          title,
+          args.title,
           style: TextStyle(fontSize: 14)
         ),
         padding: EdgeInsets.symmetric(vertical: 6.0,),
@@ -47,25 +47,52 @@ Widget card(String title, String value, BuildContext context) {
       onTap: () {
         Navigator.pushNamed(
           context, '/mine/modify',
-          arguments: ModifyArgs(title: title)
+          arguments: ModifyArgs(
+            title: args.title,
+            index: args.index
+          )
         );
       }
     ),
   );
 }
 
-Widget settings(BuildContext context, List<String> info) {
-  List<String> titles = <String>[
-    '昵称', '手机号', '邮箱'
+Widget settings(BuildContext context, dynamic info) {
+  List<ModifyArgs> titles = <ModifyArgs>[
+    ModifyArgs(
+      title: '昵称',
+      index: 'name'
+    ),
+    ModifyArgs(
+      title: '手机号',
+      index: 'tel'
+    ),
+    ModifyArgs(
+      title: '邮箱',
+      index: 'mail'
+    )
   ];
+
+  Map _info = {
+    'mail': info.mail, 'name': info.name, 'tel': info.tel
+  };
+
+  if (info.tel == '') {
+    titles = <ModifyArgs>[
+      ModifyArgs(title: '手机号', index: 'tel')
+    ];
+
+    _info = { 'tel': info.tel };
+  }
   
   return ListView.builder(
-    itemCount: info.length,
+    itemCount: titles.length,
     itemBuilder: (BuildContext context, int index) {
+      String _key = titles[index].index;
       return Container(
         child: card(
-          "${titles[index]}",
-          "${info[index]}",
+          titles[index],
+          "${_info[_key]}",
           context
         ),
         margin: EdgeInsets.symmetric(vertical: 6.0),

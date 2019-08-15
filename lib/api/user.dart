@@ -4,7 +4,9 @@ import 'package:http/http.dart' as http;
 import 'package:atlas/blocs/user.dart';
 import './config.dart';
 
-/* get user info */
+/** Get user info 
+ * @pages: ['/mine']
+ */
 class UserInfo {
   final String tel;
   final String name;
@@ -21,9 +23,15 @@ class UserInfo {
   }
 }
 
-Future<UserInfo> userInfo() async {
-  var res = await http.get(conf['url'] + '/user/0');
-
+Future<UserInfo> userInfo(String id) async {
+  String tk = await token();
+  var res = await http.get(
+    conf['url'] + '/user/$id',
+    headers: {
+      'token': tk
+    }
+  );
+    
   if (res.statusCode == 200) {
     return UserInfo.fromJson(json.decode(res.body));
   } else {

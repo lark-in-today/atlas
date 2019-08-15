@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 
 class Modify extends StatelessWidget {
   final String title;
+  final String index;
   
   Modify({
-      Key key, @required this.title
+      Key key,
+      @required this.title,
+      @required this.index
   }) : super(key: key);
   
   Widget build(BuildContext context) {

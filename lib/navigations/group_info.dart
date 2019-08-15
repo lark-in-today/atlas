@@ -3,8 +3,8 @@ import 'package:atlas/api/group.dart';
 import 'package:atlas/pages/group_info.dart';
 
 Widget group_info() {
-  return FutureBuilder<GroupCurrent>(
-    future: groupCurrent(),
+  return FutureBuilder<GroupInfo>(
+    future: groupInfo(),
     builder: (context, snapshot) {
       if (snapshot.hasData) {
         return GroupInfoPage(name: snapshot.data.name);

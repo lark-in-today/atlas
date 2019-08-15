@@ -44,15 +44,10 @@ List<Widget> children = [
 /* network wrappers */
 Widget tabMe() {
   return FutureBuilder<UserInfo>(
-    future: userInfo(),
+    future: userInfo('_'),
     builder: (context, snapshot) {
       if (snapshot.hasData) {
-        List<String> values = [
-          snapshot.data.name,
-          snapshot.data.tel,
-          snapshot.data.mail
-        ];
-        return Me(info: values);
+        return Me(info: snapshot.data);
       } else if (snapshot.hasError) {
         return Text("${snapshot.error}");
       }
