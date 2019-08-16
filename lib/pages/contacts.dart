@@ -4,6 +4,7 @@ import 'package:atlas/navigations/args.dart';
 // bloc
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:atlas/blocs/group.dart';
+import 'package:atlas/blocs/user.dart';
 
 class Contacts extends StatelessWidget {
   Contacts({ Key key }) : super(key: key);
@@ -32,10 +33,25 @@ Widget column(BuildContext context, dynamic state) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: <Widget>[
-      line(context, '切换团队', '/contacts/change_group'),
+      cg(context),
       line(context, '团队信息', '/contacts/group_info'),
       Expanded(child: contactList(state.members))
     ]
+  );
+}
+
+// if not login, do not show change group
+Widget cg(BuildContext context) {
+  return BlocBuilder<UserBloc, UserState>(
+    builder: (context, state) {
+      if (state is UserInited) {
+        if (state.tel == '') {
+          return SizedBox.shrink();
+        }
+        return line(context, '切换团队', '/contacts/change_group');
+      }
+      return SizedBox.shrink();
+    }
   );
 }
 

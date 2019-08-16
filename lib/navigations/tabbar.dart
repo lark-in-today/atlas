@@ -35,7 +35,7 @@ dynamic configs(BuildContext context) => [{
     'title': Text('我的'),
     'child': Mine(),
     'actions': [
-      Text('')
+      SizedBox.shrink()
     ]
 }];
 

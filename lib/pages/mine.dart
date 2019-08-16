@@ -15,7 +15,10 @@ class Mine extends StatelessWidget {
       ),
       child: BlocBuilder<UserBloc, UserState>(
         builder: (context, state) {
-          if (state is UserInited) {
+          if (state is UserUnInited) {
+            return Text('card');
+          }
+          else if (state is UserInited) {
             return settings(context, state);
           } else {
             return Text('requesting...');
@@ -59,11 +62,7 @@ Widget settings(BuildContext context, dynamic info) {
     itemBuilder: (BuildContext context, int index) {
       String _key = titles[index].index;
       return Container(
-        child: card(
-          titles[index],
-          "${_info[_key]}",
-          context
-        ),
+        child: card(titles[index], "${_info[_key]}", context),
         margin: EdgeInsets.symmetric(vertical: 6.0),
       );
     },

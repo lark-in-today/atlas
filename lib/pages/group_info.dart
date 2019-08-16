@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // bloc
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:atlas/blocs/user.dart';
 import 'package:atlas/blocs/group.dart';
 
 // main
@@ -36,7 +37,7 @@ Widget container(BuildContext context, dynamic info) {
       children: <Widget>[
         _title(info.name),
         Divider(),
-        _exit(context)
+        exit(context)
       ]
     )
   );
@@ -51,6 +52,20 @@ Widget _title(String title) {
         style: TextStyle(fontSize: 14.0),
       ),
     ),
+  );
+}
+
+// exit wrappr
+// if not login, do not show exit
+Widget exit(BuildContext context) {
+  return BlocBuilder<UserBloc, UserState>(
+    builder: (context, state) {
+      if (state is UserInited) {
+        if (state.tel == '') { return SizedBox.shrink(); }
+        return _exit(context);
+      }
+      return SizedBox.shrink();
+    }
   );
 }
 
