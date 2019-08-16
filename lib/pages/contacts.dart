@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:atlas/api/group.dart';
 import 'package:atlas/navigations/args.dart';
+// bloc
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:atlas/blocs/group.dart';
 
 class Contacts extends StatelessWidget {
   Contacts({ Key key }) : super(key: key);
-  dynamic state = {
-      "name": 'hello',
-      'members': []
-    };
   
   @override
   Widget build(BuildContext context) {
@@ -16,26 +15,31 @@ class Contacts extends StatelessWidget {
         vertical: 20.0,
         horizontal: 10.0
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          line(
-            context,
-            '切换团队', '/contacts/change_group',
-            GroupInfoArgs(name: state['name'])
-          ),
-          line(
-            context, '团队信息', '/contacts/group_info',
-            GroupInfoArgs(name: state['name'])
-          ),
-          Expanded(child: contactList(state.members))
-        ]
+      child: BlocBuilder<GroupBloc, GroupState>(
+        builder: (context, state) {
+          if (state is GroupChanged) {
+            return column(context, state);
+          } else {
+            return Text('requesting');
+          }
+        }
       )
     );
   }
 }
 
-Widget line(BuildContext context, String title, String path, dynamic args) {
+Widget column(BuildContext context, dynamic state) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: <Widget>[
+      line(context, '切换团队', '/contacts/change_group'),
+      line(context, '团队信息', '/contacts/group_info'),
+      Expanded(child: contactList(state.members))
+    ]
+  );
+}
+
+Widget line(BuildContext context, String title, String path) {
   return Card(
     child: ListTile(
       title: Text(
@@ -46,7 +50,7 @@ Widget line(BuildContext context, String title, String path, dynamic args) {
       dense: true,
       enabled: true,
       onTap: () {
-        Navigator.pushNamed(context, path, arguments: args);
+        Navigator.pushNamed(context, path);
       }
     )
   );

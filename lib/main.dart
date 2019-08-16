@@ -12,11 +12,11 @@ import 'package:atlas/pages/new_topic.dart';
 import 'package:atlas/pages/join_group.dart';
 import 'package:atlas/pages/comment.dart';
 import 'package:atlas/pages/modify.dart';
+import 'package:atlas/pages/group_info.dart';
 // navigations
 import 'package:atlas/navigations/args.dart';
 import 'package:atlas/navigations/topic.dart';
 import 'package:atlas/navigations/change_group.dart';
-import 'package:atlas/navigations/group_info.dart';
 import 'package:atlas/navigations/tabbar.dart';
 
 /* app */
@@ -88,9 +88,8 @@ MaterialPageRoute router(settings) {
       builder: (context) =>  change_group()
     );
   } else if (r == '/contacts/group_info') {
-    final GroupInfoArgs args = settings.arguments;
     return MaterialPageRoute(
-      builder: (context) =>  group_info(args.name)
+      builder: (context) =>  GroupInfoPage()
     );  
   } else if (r == '/contacts/member') {
     return MaterialPageRoute(

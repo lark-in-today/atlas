@@ -22,13 +22,18 @@ abstract class UserState extends Equatable {
   UserState([List props = const []]) : super(props);
 }
 
-class CurrentUser extends UserState {
+class UserUnInited extends UserState {
+  @override
+  String toString() => 'UserUnInited';
+}
+
+class UserInited extends UserState {
   final String tel;
   final String name;
   final String mail;
   final dynamic groups;
   
-  CurrentUser({
+  UserInited({
       this.tel,
       this.name,
       this.mail,
@@ -39,18 +44,13 @@ class CurrentUser extends UserState {
 // bloc
 class UserBloc extends Bloc<UserEvent, UserState> {
   @override
-  UserState get initialState => CurrentUser(
-    tel: '',
-    name: '',
-    mail: '',
-    groups: []
-  );
+  UserState get initialState => UserUnInited();
   
   @override
   Stream<UserState> mapEventToState(UserEvent event) async* {
     if (event is InitUser) {
       UserInfo info = await userInfo(event.user);
-      yield CurrentUser(
+      yield UserInited(
         tel: info.tel,
         name: info.name,
         mail: info.mail,

@@ -1,62 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:atlas/navigations/args.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:atlas/blocs/user.dart';
 
 class Mine extends StatelessWidget {
   const Mine({ Key key }) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
-    dynamic info = {
-      'tel': '',
-      'mail': '',
-      'name': ''
-    };
-    
     return Container(
       padding: EdgeInsets.symmetric(
         vertical: 20.0,
         horizontal: 10.0
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Expanded(child: settings(context, info)),
-        ]
+      child: BlocBuilder<UserBloc, UserState>(
+        builder: (context, state) {
+          if (state is UserInited) {
+            return settings(context, state);
+          } else {
+            return Text('requesting...');
+          }
+        },
       )
     );
   }
-}
-
-
-Widget card(ModifyArgs args, String value, BuildContext context) {
-  return Card(
-    child: ListTile(
-      title: Container(
-        child: Text(
-          args.title,
-          style: TextStyle(fontSize: 14)
-        ),
-        padding: EdgeInsets.symmetric(vertical: 6.0,),
-      ),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Text(value),
-          Icon(Icons.chevron_right)
-        ]
-      ),
-      dense: true,
-      onTap: () {
-        Navigator.pushNamed(
-          context, '/mine/modify',
-          arguments: ModifyArgs(
-            title: args.title,
-            index: args.index
-          )
-        );
-      }
-    ),
-  );
 }
 
 Widget settings(BuildContext context, dynamic info) {
@@ -100,5 +67,36 @@ Widget settings(BuildContext context, dynamic info) {
         margin: EdgeInsets.symmetric(vertical: 6.0),
       );
     },
+  );
+}
+
+Widget card(ModifyArgs args, String value, BuildContext context) {
+  return Card(
+    child: ListTile(
+      title: Container(
+        child: Text(
+          args.title,
+          style: TextStyle(fontSize: 14)
+        ),
+        padding: EdgeInsets.symmetric(vertical: 6.0,),
+      ),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Text(value),
+          Icon(Icons.chevron_right)
+        ]
+      ),
+      dense: true,
+      onTap: () {
+        Navigator.pushNamed(
+          context, '/mine/modify',
+          arguments: ModifyArgs(
+            title: args.title,
+            index: args.index
+          )
+        );
+      }
+    ),
   );
 }

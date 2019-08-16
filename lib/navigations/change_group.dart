@@ -11,7 +11,7 @@ Widget change_group() {
     builder: (context) => UserBloc()..dispatch(InitUser(user: '')),
     child: BlocBuilder<UserBloc, UserState>(
       builder: (context, state) {
-        if (state is CurrentUser) {
+        if (state is UserInited) {
           return ChangeGroup(groups: state.groups);
         }
       }

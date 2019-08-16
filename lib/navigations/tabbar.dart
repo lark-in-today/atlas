@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:atlas/pages/home.dart';
 import 'package:atlas/pages/contacts.dart';
 import 'package:atlas/pages/mine.dart';
+// blocs
+import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:atlas/blocs/user.dart';
+import 'package:atlas/blocs/group.dart';
 
 // configs
 dynamic configs(BuildContext context) => [{
@@ -29,7 +34,9 @@ dynamic configs(BuildContext context) => [{
   }, {
     'title': Text('我的'),
     'child': Mine(),
-    'actions': []
+    'actions': [
+      Text('')
+    ]
 }];
 
 // TabNavigator
@@ -41,6 +48,19 @@ class TabNavigator extends StatefulWidget {
 }
 
 class _TabNavigatorState extends State<TabNavigator> {
+  UserBloc _userBloc;
+  GroupBloc _groupBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    _groupBloc = BlocProvider.of<GroupBloc>(context);
+    _userBloc = BlocProvider.of<UserBloc>(context);
+
+    _groupBloc.dispatch(ChangeGroup(group: ''));
+    _userBloc.dispatch(InitUser(user: ''));
+  }
+
   int _currentIndex = 0;
   void onTapped(int index) {
     setState(() { _currentIndex = index;});

@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 
 // main
 class GroupInfoPage extends StatelessWidget {
-  final String name;
-  GroupInfoPage({
-      Key key, this.name
-  }): super(key: key);
+  GroupInfoPage({ Key key }): super(key: key);
   
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +17,7 @@ class GroupInfoPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            _title(name),
+            _title('hello'),
             Divider(),
             _exit(context)
           ]
