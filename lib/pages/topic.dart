@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:atlas/api/topic.dart';
 import 'package:atlas/navigations/args.dart';
 
 // main
@@ -39,12 +38,7 @@ class Topic extends StatelessWidget {
 // topic title
 Widget _title(String str) {
   return Card(
-    child: ListTile(
-      title: Text(
-        '${str}',
-        style: TextStyle(fontSize: 14.0),
-      ),
-    )
+    child: ListTile(title: Text(str, style: TextStyle(fontSize: 14.0)))
   );
 }
 

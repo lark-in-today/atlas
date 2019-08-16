@@ -1,11 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:atlas/api/user.dart';
 
-/** User List
- * @page: ['/home']
- */
+/// User List
+/// @page: ['/home']
 // events
 abstract class UserEvent extends Equatable {}
 

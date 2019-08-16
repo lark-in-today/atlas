@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import './config.dart';
 
-/* get user info */
+/// topic detail
 class TopicDetail {
   final String id;
   final String title;
@@ -21,7 +21,7 @@ class TopicDetail {
 }
 
 Future<TopicDetail> topicDetail(String id) async {
-  var res = await http.get(conf['url'] + '/topic/${id}');
+  var res = await http.get("${conf['url']}/topic/$id");
 
   if (res.statusCode == 200) {
     return TopicDetail.fromJson(json.decode(res.body));

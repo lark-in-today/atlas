@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:atlas/navigations/args.dart';
 
 class NewTopic extends StatelessWidget {
   Widget build(BuildContext context) {

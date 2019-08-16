@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:atlas/api/group.dart';
-import 'package:atlas/navigations/args.dart';
-// bloc
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:atlas/blocs/group.dart';
 import 'package:atlas/blocs/user.dart';

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:atlas/api/group.dart';
-import 'package:atlas/pages/topic.dart';
 import 'package:atlas/navigations/args.dart';
 // bloc
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +8,6 @@ class Home extends StatelessWidget {
   Home({ Key key }) : super(key: key);
 
   Widget build(BuildContext context) {
-    List<dynamic> topics = [];
     return BlocBuilder<GroupBloc, GroupState>(
       builder: (context, state) {
         if (state is GroupChanged) {

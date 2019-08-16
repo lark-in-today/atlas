@@ -3,9 +3,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import './config.dart';
 
-/** Get group members
- * @page: ['/contacts']
- */
+/// Get group members
+/// @page: ['/contacts']
 class GroupData {
   final String id;
   final String name;
@@ -34,10 +33,8 @@ Future<GroupData> groupData(String id) async {
   if (id == '' && tk == '') { id = '_'; }
   
   var res = await http.get(
-    conf['url'] + '/group/${id}/data',
-    headers: {
-      'token': tk
-    }
+    "${conf['url']}/group/$id/data",
+    headers: { 'token': tk }
   );
 
   if (res.statusCode == 200) {

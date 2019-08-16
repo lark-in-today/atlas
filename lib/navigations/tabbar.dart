@@ -3,7 +3,6 @@ import 'package:atlas/pages/home.dart';
 import 'package:atlas/pages/contacts.dart';
 import 'package:atlas/pages/mine.dart';
 // blocs
-import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:atlas/blocs/user.dart';
 import 'package:atlas/blocs/group.dart';

@@ -1,12 +1,10 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:atlas/api/group.dart';
 
-/** Group List
- * @page: ['/home']
- */
+/// Group List
+///@page: ['/home']
 // events
 abstract class GroupEvent extends Equatable {}
 
@@ -49,7 +47,8 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
   
   @override
   Stream<GroupState> mapEventToState(GroupEvent event) async* {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    
     if (event is ChangeGroup) {
       GroupData data = await groupData(event.group);
       

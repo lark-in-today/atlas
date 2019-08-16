@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:atlas/api/user.dart';
-// bloc
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:atlas/blocs/user.dart';
 

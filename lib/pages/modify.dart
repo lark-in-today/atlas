@@ -72,8 +72,8 @@ Widget _ok(BuildContext context, String index, String value, {bool jump}) {
   return Container(
     child: IconButton(
       icon: Icon(Icons.check),
-      onPressed: () async {
-        await _registerBloc.dispatch(Register(tel: value));
+      onPressed: () {
+        _registerBloc.dispatch(Register(tel: value));
       }
     ),
   );

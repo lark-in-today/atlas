@@ -63,7 +63,7 @@ MaterialPageRoute router(settings) {
   if (r == '/mine/modify') {
     final ModifyArgs args = settings.arguments;
     return MaterialPageRoute(
-      builder: (context) =>  Modify(title: args.title)
+      builder: (context) =>  Modify(title: args.title, index: args.index)
     );
   } else if (r == '/topic/new_topic') {
     return MaterialPageRoute(
@@ -96,4 +96,8 @@ MaterialPageRoute router(settings) {
       builder: (context) =>  Member()
     );  
   }
+
+  return MaterialPageRoute(
+    builder: (context) =>  TabNavigator()
+  );  
 }

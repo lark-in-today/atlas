@@ -1,10 +1,14 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:atlas/api/user.dart';
 
 // events
 abstract class RegisterEvent extends Equatable {}
+
+class SendCode extends RegisterEvent {
+  final String tel;
+  SendCode({this.tel});
+}
 
 class Register extends RegisterEvent {
   final String tel;
@@ -29,9 +33,12 @@ class None extends RegisterState {
   String toString() => 'None';
 }
 
-class SendRequest extends RegisterState {
+class SentCode extends RegisterState {
+  final String tel;
+  SentCode({ this.tel }) : super([ tel ]);
+  
   @override
-  String toString() => 'SendRequest';
+  String toString() => 'SentCode';
 }
 
 class Completed extends RegisterState {
@@ -51,10 +58,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   
   @override
   Stream<RegisterState> mapEventToState(RegisterEvent event) async* {
-    if (event is Register) {
-      yield SendRequest();
-      print(event.tel);
-      
+    if (event is SendCode) {
+      yield SentCode(tel: event.tel);
       yield Completed(msg: true);
       
     } else if(event is StopRegister) {
