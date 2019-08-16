@@ -43,15 +43,15 @@ Widget settings(BuildContext context, dynamic info) {
   ];
 
   Map _info = {
-    'mail': info['mail'], 'name': info['name'], 'tel': info['tel']
+    'mail': info.mail, 'name': info.name, 'tel': info.tel
   };
 
-  if (info['tel'] == '') {
+  if (info.tel == '') {
     titles = <ModifyArgs>[
       ModifyArgs(title: '手机号', index: 'tel')
     ];
 
-    _info = { 'tel': info['tel'] };
+    _info = { 'tel': info.tel };
   }
   
   return ListView.builder(

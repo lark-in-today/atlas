@@ -2,29 +2,44 @@ import 'package:flutter/material.dart';
 import 'package:atlas/api/group.dart';
 import 'package:atlas/pages/topic.dart';
 import 'package:atlas/navigations/args.dart';
+// bloc
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:atlas/blocs/group.dart';
 
 class Home extends StatelessWidget {
   Home({ Key key }) : super(key: key);
 
   Widget build(BuildContext context) {
     List<dynamic> topics = [];
-    return Container(
-      child: ListView.builder(
-        padding: EdgeInsets.symmetric(
-          vertical: 20.0,
-          horizontal: 10.0
-        ),
-        itemCount: topics.length,
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-            child: card(topics[index], context),
-            
-            margin: EdgeInsets.symmetric(vertical: 6.0),
-          );
-        },
-      )
+    return BlocBuilder<GroupBloc, GroupState>(
+      builder: (context, state) {
+        if (state is GroupChanged) {
+          return container(context, state.topics);
+        } else {
+          return Text('requesting...');
+        }
+      }
     );
   }
+}
+
+Widget container(BuildContext context, List<dynamic> topics) {
+  return Container(
+    child: ListView.builder(
+      padding: EdgeInsets.symmetric(
+        vertical: 20.0,
+        horizontal: 10.0
+      ),
+      itemCount: topics.length,
+      itemBuilder: (BuildContext context, int index) {
+        return Container(
+          child: card(topics[index], context),
+          
+          margin: EdgeInsets.symmetric(vertical: 6.0),
+        );
+      },
+    )
+  );
 }
 
 Widget card(TopicArgs topic, BuildContext context) {

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+// bloc
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:atlas/blocs/group.dart';
 
 // main
 class GroupInfoPage extends StatelessWidget {
@@ -9,24 +12,35 @@ class GroupInfoPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('团队信息'),
       ),
-      body: Container(
-        padding: EdgeInsets.symmetric(
-          vertical: 20.0,
-          horizontal: 10.0
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            _title('hello'),
-            Divider(),
-            _exit(context)
-          ]
-        )
-      ),
+      body: BlocBuilder<GroupBloc, GroupState>(
+        builder: (context, state) {
+          if (state is GroupChanged) {
+            return container(context, state);
+          } else {
+            return Text('requesting...');
+          }
+        }
+      )
     );
   }
 }
 
+Widget container(BuildContext context, dynamic info) {
+  return Container(
+    padding: EdgeInsets.symmetric(
+      vertical: 20.0,
+      horizontal: 10.0
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        _title(info.name),
+        Divider(),
+        _exit(context)
+      ]
+    )
+  );
+}
 
 // group title
 Widget _title(String title) {

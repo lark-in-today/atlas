@@ -13,10 +13,10 @@ import 'package:atlas/pages/join_group.dart';
 import 'package:atlas/pages/comment.dart';
 import 'package:atlas/pages/modify.dart';
 import 'package:atlas/pages/group_info.dart';
+import 'package:atlas/pages/change_group.dart';
 // navigations
 import 'package:atlas/navigations/args.dart';
 import 'package:atlas/navigations/topic.dart';
-import 'package:atlas/navigations/change_group.dart';
 import 'package:atlas/navigations/tabbar.dart';
 
 /* app */
@@ -85,7 +85,7 @@ MaterialPageRoute router(settings) {
     );
   } else if (r == '/contacts/change_group') {
     return MaterialPageRoute(
-      builder: (context) =>  change_group()
+      builder: (context) => ChangeGroupPage()
     );
   } else if (r == '/contacts/group_info') {
     return MaterialPageRoute(

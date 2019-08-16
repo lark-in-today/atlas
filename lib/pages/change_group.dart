@@ -1,32 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:atlas/api/user.dart';
+// bloc
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:atlas/blocs/user.dart';
 
-class ChangeGroup extends StatelessWidget {
-  final List<dynamic> groups;
-  ChangeGroup({
-      Key key, @required this.groups
-  }) : super(key: key);
+class ChangeGroupPage extends StatelessWidget {
+  ChangeGroupPage({Key key}) : super(key: key);
   
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('切换团队'),
       ),
-      body: Container(
-        padding: EdgeInsets.symmetric(
-          vertical: 20.0,
-          horizontal: 10.0
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Expanded(child: groupList(groups)),
-            // first child
-          ]
-        )
-      ),
+      body: BlocBuilder<UserBloc, UserState>(
+        builder: (context, state) {
+          if (state is UserInited) {
+            return container(context, state.groups);
+          } else {
+            return Text('requesting...');
+          }
+        }
+      )
     );
   }
+}
+
+Widget container(BuildContext context, List<dynamic> groups) {
+  return Container(
+    padding: EdgeInsets.symmetric(
+      vertical: 20.0,
+      horizontal: 10.0
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        Expanded(child: groupList(groups)),
+        // first child
+      ]
+    )
+  );
 }
 
 Widget groupList(List<dynamic> entries) {
