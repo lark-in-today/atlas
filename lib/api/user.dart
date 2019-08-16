@@ -41,36 +41,3 @@ Future<UserInfo> userInfo(String id) async {
     throw Exception('Failed to load post');
   }
 }
-
-/** Get user groups
- * @pages: [''] 
- */
-class UserGroup {
-  final dynamic groups;
-
-  UserGroup({ this.groups });
-
-  factory UserGroup.fromJson(Map<String, dynamic> json) {
-    return UserGroup(
-      groups: json['groups']
-    );
-  }
-}
-
-Future<UserGroup> userGroup(String id) async {
-  String tk = await token();
-  if (id == '' && tk == '') { id = '_'; }
-
-  var res = await http.get(
-    conf['url'] + '/user/${id}/groups',
-    headers: {
-      'token': tk
-    }
-  );
-
-  if (res.statusCode == 200) {
-    return UserGroup.fromJson(json.decode(res.body));
-  } else {
-    throw Exception('Failed to load post');
-  }
-}
