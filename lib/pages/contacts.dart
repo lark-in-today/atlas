@@ -3,11 +3,11 @@ import 'package:atlas/api/group.dart';
 import 'package:atlas/navigations/args.dart';
 
 class Contacts extends StatelessWidget {
-  final dynamic state;
-
-  Contacts({
-     Key key, @required this.state
-  }) : super(key: key);
+  Contacts({ Key key }) : super(key: key);
+  dynamic state = {
+      "name": 'hello',
+      'members': []
+    };
   
   @override
   Widget build(BuildContext context) {
@@ -22,11 +22,11 @@ class Contacts extends StatelessWidget {
           line(
             context,
             '切换团队', '/contacts/change_group',
-            GroupInfoArgs(name: state.name)
+            GroupInfoArgs(name: state['name'])
           ),
           line(
             context, '团队信息', '/contacts/group_info',
-            GroupInfoArgs(name: state.name)
+            GroupInfoArgs(name: state['name'])
           ),
           Expanded(child: contactList(state.members))
         ]

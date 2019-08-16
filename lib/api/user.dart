@@ -10,14 +10,16 @@ class UserInfo {
   final String tel;
   final String name;
   final String mail;
+  final dynamic groups;
 
-  UserInfo({this.tel, this.name, this.mail});
+  UserInfo({this.tel, this.name, this.mail, this.groups});
 
   factory UserInfo.fromJson(Map<String, dynamic> json) {
     return UserInfo(
       tel: json['tel'],
       name: json['name'],
       mail: json['mail'],
+      groups: json['groups']
     );
   }
 }

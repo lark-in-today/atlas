@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:atlas/api/user.dart';
 import 'package:atlas/pages/change_group.dart';
+// bloc
+import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:atlas/blocs/user.dart';
 
 Widget change_group() {
-  return FutureBuilder<UserGroup>(
-    future: userGroup(''),
-    builder: (context, snapshot) {
-      if (snapshot.hasData) {
-        return ChangeGroup(
-          groups: snapshot.data.groups
-        );
-      } else if (snapshot.hasError) {
-        return Text("${snapshot.error}");
+  return BlocProvider(
+    builder: (context) => UserBloc()..dispatch(InitUser(user: '')),
+    child: BlocBuilder<UserBloc, UserState>(
+      builder: (context, state) {
+        if (state is CurrentUser) {
+          return ChangeGroup(groups: state.groups);
+        }
       }
-
-      return CircularProgressIndicator();
-    }
+    )
   );
 }

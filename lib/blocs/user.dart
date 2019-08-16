@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:atlas/api/user.dart';
 
 /** User List
@@ -12,7 +11,7 @@ abstract class UserEvent extends Equatable {}
 
 class InitUser extends UserEvent {
   final String user;
-  ChangeUser({this.user});
+  InitUser({this.user});
   
   @override
   String toString() => 'InitUser';
@@ -24,35 +23,38 @@ abstract class UserState extends Equatable {
 }
 
 class CurrentUser extends UserState {
-  final String id;
+  final String tel;
   final String name;
-  final dynamic topics;
-  final dynamic members;
+  final String mail;
+  final dynamic groups;
   
   CurrentUser({
-      this.id,
+      this.tel,
       this.name,
-      this.topics,
-      this.members,
-  }) : super([ id, name, topics, members ]);
+      this.mail,
+      this.groups,
+  }) : super([ tel, name, mail, groups ]);
 }
 
 // bloc
 class UserBloc extends Bloc<UserEvent, UserState> {
   @override
-  UserState get initialState => CurrentUser(topics: []);
+  UserState get initialState => CurrentUser(
+    tel: '',
+    name: '',
+    mail: '',
+    groups: []
+  );
   
   @override
   Stream<UserState> mapEventToState(UserEvent event) async* {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (event is ChangeUser) {
-      UserData data = await groupData(event.group);
-      
+    if (event is InitUser) {
+      UserInfo info = await userInfo(event.user);
       yield CurrentUser(
-        id: data.id,
-        name: data.name,
-        topics: data.topics,
-        members: data.members
+        tel: info.tel,
+        name: info.name,
+        mail: info.mail,
+        groups: info.groups
       );
       return;
     }

@@ -23,13 +23,18 @@ abstract class GroupState extends Equatable {
   GroupState([List props = const []]) : super(props);
 }
 
-class CurrentGroup extends GroupState {
+class GroupUnInited extends GroupState {
+  @override
+  String toString() => 'GroupUnInited';
+}
+
+class GroupChanged extends GroupState {
   final String id;
   final String name;
   final dynamic topics;
   final dynamic members;
   
-  CurrentGroup({
+  GroupChanged({
       this.id,
       this.name,
       this.topics,
@@ -40,7 +45,7 @@ class CurrentGroup extends GroupState {
 // bloc
 class GroupBloc extends Bloc<GroupEvent, GroupState> {
   @override
-  GroupState get initialState => CurrentGroup(topics: []);
+  GroupState get initialState => GroupUnInited();
   
   @override
   Stream<GroupState> mapEventToState(GroupEvent event) async* {
@@ -48,7 +53,7 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
     if (event is ChangeGroup) {
       GroupData data = await groupData(event.group);
       
-      yield CurrentGroup(
+      yield GroupChanged(
         id: data.id,
         name: data.name,
         topics: data.topics,

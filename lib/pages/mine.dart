@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:atlas/navigations/args.dart';
 
-class Me extends StatelessWidget {
-  final dynamic info;
-
-  const Me({
-    Key key, @required this.info,
-  }) : super(key: key);
+class Mine extends StatelessWidget {
+  const Mine({ Key key }) : super(key: key);
   
   @override
   Widget build(BuildContext context) {
+    dynamic info = {
+      'tel': '',
+      'mail': '',
+      'name': ''
+    };
+    
     return Container(
       padding: EdgeInsets.symmetric(
         vertical: 20.0,
@@ -74,15 +76,15 @@ Widget settings(BuildContext context, dynamic info) {
   ];
 
   Map _info = {
-    'mail': info.mail, 'name': info.name, 'tel': info.tel
+    'mail': info['mail'], 'name': info['name'], 'tel': info['tel']
   };
 
-  if (info.tel == '') {
+  if (info['tel'] == '') {
     titles = <ModifyArgs>[
       ModifyArgs(title: '手机号', index: 'tel')
     ];
 
-    _info = { 'tel': info.tel };
+    _info = { 'tel': info['tel'] };
   }
   
   return ListView.builder(
