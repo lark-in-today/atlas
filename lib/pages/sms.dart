@@ -2,31 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:atlas/blocs/register.dart';
 
-
-class Modify extends StatefulWidget {
-  final String title;
-  final String index;
-  Modify({
-      Key key,
-      @required this.title,
-      @required this.index
-  }) : super(key: key);
+class Sms extends StatefulWidget {
+  Sms({ Key key }) : super(key: key);
   
   @override
-  _ModifyState createState() => _ModifyState();
+  _SmsState createState() => _SmsState();
 }
 
-class _ModifyState extends State<Modify> {
+class _SmsState extends State<Sms> {
   String _value = '';
   void changeValue(String value) {
     setState(() { _value = value; });
   }
-
+  
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
-        actions: <Widget>[ok(context, widget.index, _value)]
+        title: Text('获取验证码'),
+        actions: <Widget>[ok(context, _value)]
       ),
       body: Container(
         padding: EdgeInsets.all(20.0),
@@ -37,7 +30,7 @@ class _ModifyState extends State<Modify> {
               onChanged: changeValue,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: widget.title,
+                labelText: '验证码',
               ),
             ),
           ]
@@ -48,30 +41,33 @@ class _ModifyState extends State<Modify> {
 }
 
 // login-modify
-Widget ok(BuildContext context, String index, String value) {
+Widget ok(BuildContext context, String value) {
   return MultiBlocProvider(
     providers: [
       BlocProvider<RegisterBloc>(builder: (context) => RegisterBloc()),
     ],
     child: BlocBuilder<RegisterBloc, RegisterState>(
       builder: (context, state) {
-        if (index == 'tel') {
-          return _tel(context, index, value);
+        if (state is SentCode) {
+          return _ok(context, state.tel, value);
+        } else {
+          return SizedBox.shrink();
         }
-        return Text('hello, world!');
       }
     )
   );
 }
 
-Widget _tel(BuildContext context, String index, String value) {
+Widget _ok(BuildContext context, String tel, String value) {
   RegisterBloc _registerBloc = BlocProvider.of<RegisterBloc>(context);
   return Container(
     child: IconButton(
       icon: Icon(Icons.check),
       onPressed: () {
-        _registerBloc.dispatch(SendCode(tel: value));
-        Navigator.pushNamed(context, '/mine/modify/sms');
+        _registerBloc.dispatch(VerifyCode(
+            tel: tel, code: value
+        ));
+        Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
       }
     ),
   );

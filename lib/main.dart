@@ -14,6 +14,7 @@ import 'package:atlas/pages/comment.dart';
 import 'package:atlas/pages/modify.dart';
 import 'package:atlas/pages/group_info.dart';
 import 'package:atlas/pages/change_group.dart';
+import 'package:atlas/pages/sms.dart';
 // navigations
 import 'package:atlas/navigations/args.dart';
 import 'package:atlas/navigations/topic.dart';
@@ -60,12 +61,7 @@ Widget app(BuildContext context, ThemeData theme) {
 MaterialPageRoute router(settings) {
   String r = settings.name;
   
-  if (r == '/mine/modify') {
-    final ModifyArgs args = settings.arguments;
-    return MaterialPageRoute(
-      builder: (context) =>  Modify(title: args.title, index: args.index)
-    );
-  } else if (r == '/topic/new_topic') {
+  if (r == '/topic/new_topic') {
     return MaterialPageRoute(
       builder: (context) =>  NewTopic()
     );
@@ -94,7 +90,19 @@ MaterialPageRoute router(settings) {
   } else if (r == '/contacts/member') {
     return MaterialPageRoute(
       builder: (context) =>  Member()
-    );  
+    );
+  } else if (r == '/mine/modify') {
+    final ModifyArgs args = settings.arguments;
+    return MaterialPageRoute(
+      builder: (context) => Modify(
+        title: args.title,
+        index: args.index
+      )
+    );
+  } else if (r == '/mine/modify/sms') {
+    return MaterialPageRoute(
+      builder: (context) => Sms()
+    );
   }
 
   return MaterialPageRoute(

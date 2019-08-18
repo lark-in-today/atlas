@@ -10,6 +10,12 @@ class SendCode extends RegisterEvent {
   SendCode({this.tel});
 }
 
+class VerifyCode extends RegisterEvent {
+  final String tel;
+  final String code;
+  VerifyCode({this.tel, this.code});
+}
+
 class Register extends RegisterEvent {
   final String tel;
   Register({this.tel});
@@ -42,10 +48,8 @@ class SentCode extends RegisterState {
 }
 
 class Completed extends RegisterState {
-  final bool msg;
-  Completed({
-      this.msg
-  }) : super([ msg ]);
+  final String token;
+  Completed({ this.token }) : super([ token ]);
 
   @override
   String toString() => 'Completed';
@@ -55,13 +59,15 @@ class Completed extends RegisterState {
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   @override
   RegisterState get initialState => None();
-  
+
   @override
   Stream<RegisterState> mapEventToState(RegisterEvent event) async* {
     if (event is SendCode) {
+      await userSms(event.tel);
       yield SentCode(tel: event.tel);
-      yield Completed(msg: true);
-      
+    } else if(event is VerifyCode) {
+      UserSmsVerify res = await userSmsVerify(event.tel, event.code);
+      yield Completed(token: res.token);
     } else if(event is StopRegister) {
       yield None();
       

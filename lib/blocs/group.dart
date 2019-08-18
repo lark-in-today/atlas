@@ -48,7 +48,6 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
   @override
   Stream<GroupState> mapEventToState(GroupEvent event) async* {
     // SharedPreferences prefs = await SharedPreferences.getInstance();
-    
     if (event is ChangeGroup) {
       GroupData data = await groupData(event.group);
       

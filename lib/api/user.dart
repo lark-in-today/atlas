@@ -29,9 +29,7 @@ Future<UserInfo> userInfo(String id) async {
 
   var res = await http.get(
     "${conf['url']}/user/$id",
-    headers: {
-      'token': tk
-    }
+    headers: { 'token': tk }
   );
     
   if (res.statusCode == 200) {
@@ -43,29 +41,52 @@ Future<UserInfo> userInfo(String id) async {
 
 /// Get register
 /// @pages: ['/mine/modify']
-class UserRegisterAPI {
+class UserSMSAPI {
   final String msg;
-  UserRegisterAPI({this.msg});
+  UserSMSAPI({this.msg});
 
-  factory UserRegisterAPI.fromJson(Map<String, dynamic> json) {
-    return UserRegisterAPI(
-      msg: json['msg']
-    );
+  factory UserSMSAPI.fromJson(Map<String, dynamic> json) {
+    return UserSMSAPI(msg: json['msg']);
   }
 }
 
-Future<UserRegisterAPI> userRegister(String tel) async {
-  String tk = await token();
-
-  var res = await http.post(
-    "${conf['url']}/user/$tel/sms",
-    headers: { 'token': tk },
-    body: { 'tel': tel }
-  );
+Future<UserSMSAPI> userSms(String tel) async {
+  var res = await http.post("${conf['url']}/user/$tel/sms");
     
   if (res.statusCode == 200) {
-    return UserRegisterAPI.fromJson(json.decode(res.body));
+    return UserSMSAPI.fromJson(json.decode(res.body));
   } else {
     throw Exception('Failed to load post');
   }
 }
+
+/// Get register
+/// @pages: ['/mine/modify']
+class UserSmsVerify {
+  final String msg;
+  final String token;
+  UserSmsVerify({this.msg, this.token});
+
+  factory UserSmsVerify.fromJson(Map<String, dynamic> json) {
+    return UserSmsVerify(
+      msg: json['msg'],
+      token: json['token']
+    );
+  }
+}
+
+Future<UserSmsVerify> userSmsVerify(String tel, String code) async {
+  var res = await http.post(
+    "${conf['url']}/user/$tel/sms_verify",
+    body: {
+      'code': code
+    }
+  );
+    
+  if (res.statusCode == 200) {
+    return UserSmsVerify.fromJson(json.decode(res.body));
+  } else {
+    throw Exception('Failed to load post');
+  }
+}
+

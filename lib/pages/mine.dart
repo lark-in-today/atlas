@@ -49,6 +49,7 @@ Widget settings(BuildContext context, dynamic info) {
     'mail': info.mail, 'name': info.name, 'tel': info.tel
   };
 
+  // if user not login;
   if (info.tel == '') {
     titles = <ModifyArgs>[
       ModifyArgs(title: '手机号', index: 'tel')
