@@ -18,7 +18,7 @@ class _SmsState extends State<Sms> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('获取验证码'),
+        title: Text('输入验证码'),
         actions: <Widget>[ok(context, _value)]
       ),
       body: Container(
@@ -42,21 +42,17 @@ class _SmsState extends State<Sms> {
 
 // login-modify
 Widget ok(BuildContext context, String value) {
-  return MultiBlocProvider(
-    providers: [
-      BlocProvider<RegisterBloc>(builder: (context) => RegisterBloc()),
-    ],
-    child: BlocBuilder<RegisterBloc, RegisterState>(
-      builder: (context, state) {
-        if (state is SentCode) {
-          return _ok(context, state.tel, value);
-        } else {
-          return SizedBox.shrink();
-        }
+  return BlocBuilder<RegisterBloc, RegisterState>(
+    builder: (context, state) {
+      if (state is SentCode) {
+        return _ok(context, state.tel, value);
+      } else {
+        return SizedBox.shrink();
       }
-    )
+    }
   );
 }
+
 
 Widget _ok(BuildContext context, String tel, String value) {
   RegisterBloc _registerBloc = BlocProvider.of<RegisterBloc>(context);

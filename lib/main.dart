@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:atlas/blocs/main.dart';
 import 'package:atlas/blocs/user.dart';
 import 'package:atlas/blocs/group.dart';
+import 'package:atlas/blocs/register.dart';
 // pages
 import 'package:atlas/pages/member.dart';
 import 'package:atlas/pages/new_topic.dart';
@@ -39,6 +40,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<UserBloc>(
           builder: (context) => UserBloc(),
+        ),
+        BlocProvider<RegisterBloc>(
+          builder: (context) => RegisterBloc()
         ),
       ],
       child: BlocBuilder<ThemeBloc, ThemeData>(

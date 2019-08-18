@@ -70,8 +70,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       yield Completed(token: res.token);
     } else if(event is StopRegister) {
       yield None();
-      
     }
-    return;
   }
 }

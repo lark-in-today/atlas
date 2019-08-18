@@ -17,8 +17,7 @@ class Mine extends StatelessWidget {
         builder: (context, state) {
           if (state is UserUnInited) {
             return Text('card');
-          }
-          else if (state is UserInited) {
+          } else if (state is UserInited) {
             return settings(context, state);
           } else {
             return Text('requesting...');

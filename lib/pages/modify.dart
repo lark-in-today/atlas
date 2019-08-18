@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:atlas/blocs/register.dart';
 
-
 class Modify extends StatefulWidget {
   final String title;
   final String index;
@@ -49,18 +48,13 @@ class _ModifyState extends State<Modify> {
 
 // login-modify
 Widget ok(BuildContext context, String index, String value) {
-  return MultiBlocProvider(
-    providers: [
-      BlocProvider<RegisterBloc>(builder: (context) => RegisterBloc()),
-    ],
-    child: BlocBuilder<RegisterBloc, RegisterState>(
-      builder: (context, state) {
-        if (index == 'tel') {
-          return _tel(context, index, value);
-        }
-        return Text('hello, world!');
+  return BlocBuilder<RegisterBloc, RegisterState>(
+    builder: (context, state) {
+      if (index == 'tel') {
+        return _tel(context, index, value);
       }
-    )
+      return Text('hello, world!');
+    }
   );
 }
 
