@@ -17,6 +17,8 @@ class Contacts extends StatelessWidget {
         builder: (context, state) {
           if (state is GroupChanged) {
             return column(context, state);
+          } else if(state is EmptyGroup) {
+            return Center(child: Text('Empty Groups, plz add group from +'));
           } else {
             return Text('requesting');
           }
@@ -80,7 +82,7 @@ Widget contactList(List<dynamic> entries) {
       return Card(
         child: ListTile(
           title: Text(
-            "${entries[index]['name']}",
+            "${entries[index]}",
             style: TextStyle(fontSize: 14.0),
           ),
           dense: true,

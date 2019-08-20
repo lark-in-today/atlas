@@ -9,7 +9,7 @@ class UserInfo {
   final String tel;
   final String name;
   final String mail;
-  final dynamic groups;
+  final List<dynamic> groups;
 
   UserInfo({this.tel, this.name, this.mail, this.groups});
 
@@ -91,7 +91,7 @@ Future<UserSmsVerify> userSmsVerify(String tel, String code) async {
 
 /// Get register
 /// @pages: ['/mine/modify']
-Future<UserInfo> userUpdate(String key, String value) async {
+Future<UserInfo> userUpdate(String key, dynamic value) async {
   String tk = await token();
   String tel = await getId();
   
@@ -99,8 +99,7 @@ Future<UserInfo> userUpdate(String key, String value) async {
     "${conf['url']}/user/$tel/update",
     headers: { 'token': tk },
     body: {
-      'key': key,
-      'value': value
+      'key': key, 'value': value
     }
   );
     
@@ -110,4 +109,3 @@ Future<UserInfo> userUpdate(String key, String value) async {
     throw Exception('Failed to load post');
   }
 }
-

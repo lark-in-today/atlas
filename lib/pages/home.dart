@@ -12,6 +12,11 @@ class Home extends StatelessWidget {
       builder: (context, state) {
         if (state is GroupChanged) {
           return container(context, state.topics);
+          if (state.topics.length == 0) {
+            return Center(child: Text('No topics now.'));
+          }
+        } else if(state is EmptyGroup) {
+          return Center(child: Text('No topics now.'));
         } else {
           return Text('requesting...');
         }

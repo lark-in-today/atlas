@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:atlas/blocs/user.dart';
+import 'package:atlas/blocs/group.dart';
 
 class ChangeGroupPage extends StatelessWidget {
   ChangeGroupPage({Key key}) : super(key: key);
@@ -32,14 +33,16 @@ Widget container(BuildContext context, List<dynamic> groups) {
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        Expanded(child: groupList(groups)),
+        Expanded(child: groupList(groups, context)),
         // first child
       ]
     )
   );
 }
 
-Widget groupList(List<dynamic> entries) {
+Widget groupList(List<dynamic> entries, BuildContext context) {
+  GroupBloc _groupBloc = BlocProvider.of<GroupBloc>(context);
+  
   return ListView.builder(
     padding: EdgeInsets.only(top: 10.0),
     itemCount: entries.length,
@@ -53,7 +56,10 @@ Widget groupList(List<dynamic> entries) {
           dense: true,
           trailing: null,
           enabled: true,
-          onTap: () { Navigator.pop(context); }
+          onTap: () {
+            _groupBloc.dispatch(ChangeGroup(entries[index]));
+            Navigator.pop(context);
+          }
         ),
       );
     },

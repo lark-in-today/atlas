@@ -23,7 +23,7 @@ class CommentArgs {
 
 // page 
 class ChangeGroupArgs {
-  final List<dynamic> groups;
+  final List<String> groups;
 
   ChangeGroupArgs({ this.groups });
 }

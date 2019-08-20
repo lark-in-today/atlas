@@ -76,7 +76,6 @@ Widget _modify(BuildContext context, String index, String value) {
           context, '/init', (_) => false,
           arguments: RootArgs( index: 2 )
         );
-        // Navigator.pop(context);
       }
     ),
   );

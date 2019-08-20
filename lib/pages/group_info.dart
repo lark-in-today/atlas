@@ -37,7 +37,7 @@ Widget container(BuildContext context, dynamic info) {
       children: <Widget>[
         _title(info.name),
         Divider(),
-        exit(context)
+        exit(context, info.name)
       ]
     )
   );
@@ -47,22 +47,19 @@ Widget container(BuildContext context, dynamic info) {
 Widget _title(String title) {
   return Card(
     child: ListTile(
-      title: Text(
-        title,
-        style: TextStyle(fontSize: 14.0),
-      ),
+      title: Text(title, style: TextStyle(fontSize: 14.0)),
     ),
   );
 }
 
 // exit wrappr
 // if not login, do not show exit
-Widget exit(BuildContext context) {
+Widget exit(BuildContext context, String name) {
   return BlocBuilder<UserBloc, UserState>(
     builder: (context, state) {
       if (state is UserInited) {
         if (state.tel == '') { return SizedBox.shrink(); }
-        return _exit(context);
+        return _exit(context, name);
       }
       return SizedBox.shrink();
     }
@@ -70,18 +67,20 @@ Widget exit(BuildContext context) {
 }
 
 // exit group
-Widget _exit(BuildContext context) {
+Widget _exit(BuildContext context, String name) {
+  UserBloc _userBloc = BlocProvider.of<UserBloc>(context);
+  
   return Container(
     padding: EdgeInsets.symmetric(
       horizontal: 5.0
     ),
     child: RaisedButton(
       onPressed: () {
+        _userBloc.dispatch(QuitGroupEvent(name: name));
         Navigator.pop(context);
       },
       child: const Text(
-        '退出团队',
-        style: TextStyle(fontSize: 20)
+        '退出团队', style: TextStyle(fontSize: 20)
       ),
     ),
   );

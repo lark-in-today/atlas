@@ -18,6 +18,11 @@ class ChangeGroup extends GroupEvent {
   String toString() => 'ChangeGroup';
 }
 
+class EmptyGroupEvent extends GroupEvent {
+  @override
+  String toString() => 'EmptyGroup';
+}
+
 // states
 abstract class GroupState extends Equatable {
   GroupState([List props = const []]) : super(props);
@@ -36,8 +41,13 @@ class GroupChanged extends GroupState {
   GroupChanged({
       this.name,
       this.topics,
-      this.members,
+      this.members
   }) : super([ name, topics, members ]);
+}
+
+class EmptyGroup extends GroupState {
+  @override
+  String toString() => 'EmptyGroup';
 }
 
 // bloc
@@ -48,8 +58,12 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
   GroupBloc(this.userBloc) {
     userBlocSubscription = userBloc.state.listen((state){
         if (state is UserInited) {
-          this.dispatch(ChangeGroup(state.groups[0]));
-        }
+          if (state.groups.length == 0) {
+            this.dispatch(EmptyGroupEvent());
+          } else {
+            this.dispatch(ChangeGroup(state.groups[0]));
+          }
+        } 
     });
   }
   
@@ -67,6 +81,8 @@ class GroupBloc extends Bloc<GroupEvent, GroupState> {
         members: data.members
       );
       return;
+    } else if (event is EmptyGroupEvent) {
+      yield EmptyGroup();
     }
   }
 }
