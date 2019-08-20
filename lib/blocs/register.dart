@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:atlas/api/user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // events
 abstract class RegisterEvent extends Equatable {}
@@ -66,7 +67,12 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       await userSms(event.tel);
       yield SentCode(tel: event.tel);
     } else if(event is VerifyCode) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
       UserSmsVerify res = await userSmsVerify(event.tel, event.code);
+
+      prefs.setString('token', res.token);
+      prefs.setString('tel', event.tel);
+
       yield Completed(token: res.token);
     } else if(event is StopRegister) {
       yield None();

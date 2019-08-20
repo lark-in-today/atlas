@@ -47,7 +47,7 @@ Widget groupList(List<dynamic> entries) {
       return Card(
         child: ListTile(
           title: Text(
-            "${entries[index]['name']}",
+            "${entries[index]}",
             style: TextStyle(fontSize: 14.0),
           ),
           dense: true,

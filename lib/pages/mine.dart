@@ -19,8 +19,8 @@ class Mine extends StatelessWidget {
             return Text('card');
           } else if (state is UserInited) {
             return settings(context, state);
-          } else {
-            return Text('requesting...');
+          } else if (state is UserUpdated) {
+            return settings(context, state);
           }
         },
       )
@@ -63,7 +63,7 @@ Widget settings(BuildContext context, dynamic info) {
       String _key = titles[index].index;
       return Container(
         child: card(titles[index], "${_info[_key]}", context),
-        margin: EdgeInsets.symmetric(vertical: 6.0),
+        margin: EdgeInsets.symmetric(vertical: 5.0),
       );
     },
   );
@@ -77,7 +77,7 @@ Widget card(ModifyArgs args, String value, BuildContext context) {
           args.title,
           style: TextStyle(fontSize: 14)
         ),
-        padding: EdgeInsets.symmetric(vertical: 6.0,),
+        padding: EdgeInsets.symmetric(vertical: 5.0),
       ),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,

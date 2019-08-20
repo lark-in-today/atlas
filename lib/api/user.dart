@@ -23,10 +23,11 @@ class UserInfo {
   }
 }
 
+/// TODO: other users
 Future<UserInfo> userInfo(String id) async {
   String tk = await token();
-  if (id == '' && tk == '') { id = '_'; }
-
+  String id = await getId();
+  
   var res = await http.get(
     "${conf['url']}/user/$id",
     headers: { 'token': tk }
@@ -78,13 +79,33 @@ class UserSmsVerify {
 Future<UserSmsVerify> userSmsVerify(String tel, String code) async {
   var res = await http.post(
     "${conf['url']}/user/$tel/sms_verify",
-    body: {
-      'code': code
-    }
+    body: { 'code': code}
   );
     
   if (res.statusCode == 200) {
     return UserSmsVerify.fromJson(json.decode(res.body));
+  } else {
+    throw Exception('Failed to load post');
+  }
+}
+
+/// Get register
+/// @pages: ['/mine/modify']
+Future<UserInfo> userUpdate(String key, String value) async {
+  String tk = await token();
+  String tel = await getId();
+  
+  var res = await http.put(
+    "${conf['url']}/user/$tel/update",
+    headers: { 'token': tk },
+    body: {
+      'key': key,
+      'value': value
+    }
+  );
+    
+  if (res.statusCode == 200) {
+    return UserInfo.fromJson(json.decode(res.body));
   } else {
     throw Exception('Failed to load post');
   }

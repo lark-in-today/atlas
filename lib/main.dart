@@ -28,6 +28,8 @@ void main() {
 }
 
 class App extends StatelessWidget {
+  UserBloc userBloc = UserBloc();
+  
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -35,11 +37,11 @@ class App extends StatelessWidget {
         BlocProvider<ThemeBloc>(
           builder: (context) => ThemeBloc(),
         ),
-        BlocProvider<GroupBloc>(
-          builder: (context) => GroupBloc(),
-        ),
         BlocProvider<UserBloc>(
-          builder: (context) => UserBloc(),
+          builder: (context) => userBloc,
+        ),
+        BlocProvider<GroupBloc>(
+          builder: (context) => GroupBloc(userBloc),
         ),
         BlocProvider<RegisterBloc>(
           builder: (context) => RegisterBloc()
@@ -47,7 +49,7 @@ class App extends StatelessWidget {
       ],
       child: BlocBuilder<ThemeBloc, ThemeData>(
         builder: (context, theme) => app(context, theme)
-      ) 
+      )
     );
   }
 }
@@ -57,15 +59,19 @@ Widget app(BuildContext context, ThemeData theme) {
     theme: theme,
     initialRoute: '/',
     onGenerateRoute: router,
-    home: TabNavigator()
+    home: TabNavigator(index: 0)
   );
 }
 
 /* app router */
 MaterialPageRoute router(settings) {
   String r = settings.name;
-  
-  if (r == '/topic/new_topic') {
+  if (r == '/init') {
+    final RootArgs args = settings.arguments;
+    return MaterialPageRoute(
+      builder: (context) =>  TabNavigator(index: args.index)
+    );
+  } else if (r == '/topic/new_topic') {
     return MaterialPageRoute(
       builder: (context) =>  NewTopic()
     );

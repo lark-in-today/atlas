@@ -10,6 +10,12 @@ Future<String> token() async {
   return tk;
 }
 
+Future<String> getId() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String id = prefs.getString('tel') ?? '';
+  return id;
+}
+
 void setToken(String _tk) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.setString('token', _tk);
@@ -17,6 +23,6 @@ void setToken(String _tk) async {
 
 Future<String> currentGroup() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
-  String group = prefs.getString('current_group') ?? '_';
+  String group = prefs.getString('current_group') ?? 'atlas';
   return group;
 }

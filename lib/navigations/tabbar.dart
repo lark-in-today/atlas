@@ -40,7 +40,8 @@ dynamic configs(BuildContext context) => [{
 
 // TabNavigator
 class TabNavigator extends StatefulWidget {
-  TabNavigator({Key key}) : super(key: key);
+  final int index;
+  TabNavigator({Key key, @required this.index}) : super(key: key);
   
   @override
   _TabNavigatorState createState() => _TabNavigatorState();
@@ -50,25 +51,25 @@ class _TabNavigatorState extends State<TabNavigator> {
   UserBloc _userBloc;
   GroupBloc _groupBloc;
 
-  @override
-  void initState() {
-    super.initState();
-    _groupBloc = BlocProvider.of<GroupBloc>(context);
-    _userBloc = BlocProvider.of<UserBloc>(context);
-
-    _groupBloc.dispatch(ChangeGroup(group: ''));
-    _userBloc.dispatch(InitUser(user: ''));
-  }
-
   int _currentIndex = 0;
   void onTapped(int index) {
     setState(() { _currentIndex = index;});
   }
   
   @override
+  void initState() {
+    super.initState();
+    _userBloc = BlocProvider.of<UserBloc>(context);
+    _userBloc.dispatch(InitUser());
+
+    _currentIndex = widget.index;
+  }
+
+  // if args
+  @override
   Widget build(BuildContext context) {
     dynamic conf = configs(context);
-    
+
     return Scaffold(
       appBar: AppBar(
         leading: null,

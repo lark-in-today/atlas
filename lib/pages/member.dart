@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:atlas/components/x.dart';
 
 class Member extends StatelessWidget {
-  final List<String> settingList = <String>[
-    '昵称', '邮箱'
-  ];
+  final List<String> settingList = <String>['昵称', '邮箱'];
   
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:atlas/navigations/args.dart';
 import 'package:atlas/blocs/register.dart';
 
 class Sms extends StatefulWidget {
@@ -53,17 +54,19 @@ Widget ok(BuildContext context, String value) {
   );
 }
 
-
 Widget _ok(BuildContext context, String tel, String value) {
   RegisterBloc _registerBloc = BlocProvider.of<RegisterBloc>(context);
   return Container(
     child: IconButton(
       icon: Icon(Icons.check),
       onPressed: () {
-        _registerBloc.dispatch(VerifyCode(
-            tel: tel, code: value
-        ));
-        Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+        _registerBloc.dispatch(VerifyCode(tel: tel, code: value));
+        Navigator.pushNamedAndRemoveUntil(
+          context, '/init', (_) => false,
+          arguments: RootArgs(
+             index: 2
+          )
+        );
       }
     ),
   );

@@ -34,3 +34,11 @@ class GroupInfoArgs {
 
   GroupInfoArgs({this.name});
 }
+
+// root
+class RootArgs {
+  final int index;
+  final bool update;
+
+  RootArgs({this.index, this.update});
+}

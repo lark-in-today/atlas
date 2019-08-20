@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:atlas/blocs/user.dart';
 import 'package:atlas/blocs/register.dart';
+import 'package:atlas/navigations/args.dart';
 
 class Modify extends StatefulWidget {
   final String title;
@@ -53,8 +55,30 @@ Widget ok(BuildContext context, String index, String value) {
       if (index == 'tel') {
         return _tel(context, index, value);
       }
-      return Text('hello, world!');
+      return _modify(context, index, value);
     }
+  );
+}
+
+// TODO: do not refresh the whole application.
+Widget _modify(BuildContext context, String index, String value) {
+  UserBloc _userBloc = BlocProvider.of<UserBloc>(context);
+  return Container(
+    child: IconButton(
+      icon: Icon(Icons.check),
+      onPressed: () {
+        if (index == 'mail') {
+          _userBloc.dispatch(UpdateUser(mail: value));
+        } else {
+          _userBloc.dispatch(UpdateUser(name: value));
+        }
+        Navigator.pushNamedAndRemoveUntil(
+          context, '/init', (_) => false,
+          arguments: RootArgs( index: 2 )
+        );
+        // Navigator.pop(context);
+      }
+    ),
   );
 }
 

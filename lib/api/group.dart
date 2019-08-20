@@ -6,13 +6,11 @@ import './config.dart';
 /// Get group members
 /// @page: ['/contacts']
 class GroupData {
-  final String id;
   final String name;
   final dynamic topics;
   final dynamic members;
 
   GroupData({
-      this.id,
       this.name,
       this.topics,
       this.members
@@ -20,7 +18,6 @@ class GroupData {
 
   factory GroupData.fromJson(Map<String, dynamic> json) {
     return GroupData(
-      id: json['id'],
       name: json['name'],
       topics: json['topics'],
       members: json['members'],
@@ -28,12 +25,11 @@ class GroupData {
   }
 }
 
-Future<GroupData> groupData(String id) async {
+Future<GroupData> groupData(String name) async {
   String tk = await token();
-  if (id == '' && tk == '') { id = '_'; }
   
   var res = await http.get(
-    "${conf['url']}/group/$id/data",
+    "${conf['url']}/group/$name/data",
     headers: { 'token': tk }
   );
 

@@ -53,19 +53,22 @@ Widget cg(BuildContext context) {
 }
 
 Widget line(BuildContext context, String title, String path) {
-  return Card(
-    child: ListTile(
-      title: Text(
-        title,
-        style: TextStyle(fontSize: 14.0),
-      ),
-      trailing: Icon(Icons.chevron_right),
-      dense: true,
-      enabled: true,
-      onTap: () {
-        Navigator.pushNamed(context, path);
-      }
-    )
+  return Container(
+    child: Card(
+      child: ListTile(
+        title: Text(
+          title,
+          style: TextStyle(fontSize: 14.0),
+        ),
+        trailing: Icon(Icons.chevron_right),
+        dense: true,
+        enabled: true,
+        onTap: () {
+          Navigator.pushNamed(context, path);
+        }
+      )
+    ),
+    margin: EdgeInsets.symmetric(vertical: 5.0),
   );
 }
 
