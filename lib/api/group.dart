@@ -25,11 +25,11 @@ class GroupData {
   }
 }
 
-Future<GroupData> groupData(String name) async {
+Future<GroupData> groupData(String group) async {
   String tk = await token();
   
   var res = await http.get(
-    "${conf['url']}/group/$name/data",
+    "${conf['url']}/group/$group/data",
     headers: { 'token': tk }
   );
 

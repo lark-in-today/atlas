@@ -3,6 +3,31 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import './config.dart';
 
+class UserThum {
+  final String name;
+  final String mail;
+  UserThum({ this.name, this.mail });
+
+  factory UserThum.fromJson(Map<String, dynamic> json) {
+    return UserThum(name: json['name'], mail: json['mail']);
+  }
+}
+
+Future<UserThum> userThum(String name) async {
+  String tk = await token();
+  
+  var res = await http.get(
+    "${conf['url']}/user/$name/thum",
+    headers: { 'token': tk }
+  );
+  
+  if (res.statusCode == 200) {
+    return UserThum.fromJson(json.decode(res.body));
+  } else {
+    throw Exception('Failed to load post');
+  }
+}
+
 /// Get user info 
 /// @pages: ['/mine']
 class UserInfo {

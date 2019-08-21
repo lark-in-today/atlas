@@ -11,12 +11,12 @@ class Home extends StatelessWidget {
     return BlocBuilder<GroupBloc, GroupState>(
       builder: (context, state) {
         if (state is GroupChanged) {
-          return container(context, state.topics);
           if (state.topics.length == 0) {
             return Center(child: Text('No topics now.'));
           }
+          return container(context, state.topics);
         } else if(state is EmptyGroup) {
-          return Center(child: Text('No topics now.'));
+          return Center(child: Text('No Group now.'));
         } else {
           return Text('requesting...');
         }
@@ -34,9 +34,12 @@ Widget container(BuildContext context, List<dynamic> topics) {
       ),
       itemCount: topics.length,
       itemBuilder: (BuildContext context, int index) {
+        TopicArgs args = TopicArgs(
+          title: topics[index]['title'],
+          id: topics[index]['id']
+        );
         return Container(
-          child: card(topics[index], context),
-          
+          child: card(args, context),
           margin: EdgeInsets.symmetric(vertical: 6.0),
         );
       },

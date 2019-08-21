@@ -12,11 +12,19 @@ dynamic configs(BuildContext context) => [{
     'title': Text('话题'),
     'child': Home(),
     'actions': [
-      IconButton(
-        icon: const Icon(Icons.add),
-        onPressed: () {
-          Navigator.pushNamed(context, '/topic/new_topic');
-        },
+      BlocBuilder<GroupBloc, GroupState>(
+        builder: (context, state) {
+          if (state is EmptyGroup) {
+            return SizedBox.shrink();
+          } else {
+            return IconButton(
+              icon: const Icon(Icons.add),
+              onPressed: () {
+                Navigator.pushNamed(context, '/topic/new_topic');
+              },
+            );
+          }
+        }
       )
     ],
   }, {

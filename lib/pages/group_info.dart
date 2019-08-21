@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 // bloc
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:atlas/navigations/args.dart';
 import 'package:atlas/blocs/user.dart';
 import 'package:atlas/blocs/group.dart';
 
@@ -77,7 +78,10 @@ Widget _exit(BuildContext context, String name) {
     child: RaisedButton(
       onPressed: () {
         _userBloc.dispatch(QuitGroupEvent(name: name));
-        Navigator.pop(context);
+        Navigator.pushNamedAndRemoveUntil(
+          context, '/init', (_) => false,
+          arguments: RootArgs( index: 1 )
+        );
       },
       child: const Text(
         '退出团队', style: TextStyle(fontSize: 20)

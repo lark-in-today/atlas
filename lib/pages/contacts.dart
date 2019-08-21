@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:atlas/blocs/group.dart';
 import 'package:atlas/blocs/user.dart';
+import 'package:atlas/navigations/args.dart';
 
 class Contacts extends StatelessWidget {
   Contacts({ Key key }) : super(key: key);
@@ -87,7 +88,10 @@ Widget contactList(List<dynamic> entries) {
           ),
           dense: true,
           enabled: true,
-          onTap: () => Navigator.pushNamed(context, '/contacts/member')
+          onTap: () => Navigator.pushNamed(
+            context, '/contacts/member',
+            arguments: MemberArgs(name: entries[index])
+          )
         ),
       );
     },

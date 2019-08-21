@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:atlas/blocs/main.dart';
 import 'package:atlas/blocs/user.dart';
 import 'package:atlas/blocs/group.dart';
+import 'package:atlas/blocs/topic.dart';
 import 'package:atlas/blocs/register.dart';
 // pages
 import 'package:atlas/pages/member.dart';
@@ -19,6 +20,7 @@ import 'package:atlas/pages/sms.dart';
 // navigations
 import 'package:atlas/navigations/args.dart';
 import 'package:atlas/navigations/topic.dart';
+import 'package:atlas/navigations/member.dart';
 import 'package:atlas/navigations/tabbar.dart';
 
 /* app */
@@ -42,6 +44,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<GroupBloc>(
           builder: (context) => GroupBloc(userBloc),
+        ),
+        BlocProvider<TopicBloc>(
+          builder: (context) => TopicBloc(),
         ),
         BlocProvider<RegisterBloc>(
           builder: (context) => RegisterBloc()
@@ -98,8 +103,9 @@ MaterialPageRoute router(settings) {
       builder: (context) =>  GroupInfoPage()
     );  
   } else if (r == '/contacts/member') {
+    final MemberArgs args = settings.arguments;
     return MaterialPageRoute(
-      builder: (context) =>  Member()
+      builder: (context) =>  member(args)
     );
   } else if (r == '/mine/modify') {
     final ModifyArgs args = settings.arguments;

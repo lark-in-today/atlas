@@ -11,6 +11,7 @@ Widget topic(TopicArgs args) {
         return Topic(
           id: args.id,
           title: snapshot.data.title,
+          content: snapshot.data.content,
           comments: snapshot.data.comments,
         );
       } else if (snapshot.hasError) {

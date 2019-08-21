@@ -5,10 +5,11 @@ import 'package:atlas/navigations/args.dart';
 class Topic extends StatelessWidget {
   final String id;
   final String title;
+  final String content;
   final List<dynamic> comments;
 
   Topic({
-      Key key, this.id, this.title, this.comments
+      Key key, this.id, this.title, this.comments, this.content
   }) : super(key: key);
   
   Widget build(BuildContext context) {
@@ -24,6 +25,7 @@ class Topic extends StatelessWidget {
         child: Column(
           children: <Widget>[
             _title(title),
+            _title(content),
             Divider(),
             _comments(comments),
             Divider(),
@@ -37,6 +39,13 @@ class Topic extends StatelessWidget {
 
 // topic title
 Widget _title(String str) {
+  return Card(
+    child: ListTile(title: Text(str, style: TextStyle(fontSize: 14.0)))
+  );
+}
+
+// topic content
+Widget _content(String str) {
   return Card(
     child: ListTile(title: Text(str, style: TextStyle(fontSize: 14.0)))
   );

@@ -1,3 +1,11 @@
+// root
+class RootArgs {
+  final int index;
+  final bool update;
+
+  RootArgs({this.index, this.update});
+}
+
 // page modify
 class ModifyArgs {
   final String title;
@@ -35,10 +43,9 @@ class GroupInfoArgs {
   GroupInfoArgs({this.name});
 }
 
-// root
-class RootArgs {
-  final int index;
-  final bool update;
+// member
+class MemberArgs {
+  final String name;
 
-  RootArgs({this.index, this.update});
+  MemberArgs({this.name});
 }

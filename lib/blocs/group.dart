@@ -7,7 +7,7 @@ import './user.dart';
 
 /// Group List
 ///@page: ['/home']
-// events
+// ------- events --------
 abstract class GroupEvent extends Equatable {}
 
 class ChangeGroup extends GroupEvent {
@@ -23,7 +23,7 @@ class EmptyGroupEvent extends GroupEvent {
   String toString() => 'EmptyGroup';
 }
 
-// states
+// -------- states --------
 abstract class GroupState extends Equatable {
   GroupState([List props = const []]) : super(props);
 }
@@ -50,7 +50,7 @@ class EmptyGroup extends GroupState {
   String toString() => 'EmptyGroup';
 }
 
-// bloc
+// --------- bloc ---------
 class GroupBloc extends Bloc<GroupEvent, GroupState> {
   final UserBloc userBloc;
   StreamSubscription userBlocSubscription;
