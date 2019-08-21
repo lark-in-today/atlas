@@ -18,7 +18,7 @@ class Home extends StatelessWidget {
         } else if(state is EmptyGroup) {
           return Center(child: Text('No Group now.'));
         } else {
-          return Text('requesting...');
+          return Center(child: Text('network error 🤨'));
         }
       }
     );

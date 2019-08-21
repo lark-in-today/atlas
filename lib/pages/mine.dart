@@ -16,7 +16,9 @@ class Mine extends StatelessWidget {
       child: BlocBuilder<UserBloc, UserState>(
         builder: (context, state) {
           if (state is UserUnInited) {
-            return Text('card');
+            /// if user uninited
+            /// return only tel card
+            return Center(child: Text('network error 🤨'));
           } else if (state is UserInited) {
             return settings(context, state);
           } else if (state is UserUpdated) {

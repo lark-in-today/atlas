@@ -24,8 +24,7 @@ class Topic extends StatelessWidget {
         ),
         child: Column(
           children: <Widget>[
-            _title(title),
-            _title(content),
+            _title(context, title, content),
             Divider(),
             _comments(comments),
             Divider(),
@@ -38,9 +37,26 @@ class Topic extends StatelessWidget {
 }
 
 // topic title
-Widget _title(String str) {
+Widget _title(BuildContext context, String title, String content) {
   return Card(
-    child: ListTile(title: Text(str, style: TextStyle(fontSize: 14.0)))
+    child: ListTile(
+      title: Container(
+        child: RichText(
+          text: TextSpan(
+            style: TextStyle(
+              fontSize: 14.0,
+              color: Colors.black.withOpacity(0.6),
+            ),
+            children: <TextSpan>[
+              TextSpan(text: title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0)),
+              TextSpan(text: '\n\n'),
+              TextSpan(text: content),
+            ],
+          ),
+        ),
+        padding: EdgeInsets.symmetric(vertical: 10.0),
+      )
+    )
   );
 }
 

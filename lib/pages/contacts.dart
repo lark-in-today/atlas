@@ -21,7 +21,7 @@ class Contacts extends StatelessWidget {
           } else if(state is EmptyGroup) {
             return Center(child: Text('Empty Groups, plz add group from +'));
           } else {
-            return Text('requesting');
+            return Center(child: Text('network error 🤨'));
           }
         }
       )
