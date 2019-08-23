@@ -9,37 +9,45 @@ import 'package:atlas/blocs/group.dart';
 
 // configs
 dynamic configs(BuildContext context) => [{
-    'title': Text('话题'),
+    'title': Text('文章列表'),
     'child': Home(),
     'actions': [
       BlocBuilder<GroupBloc, GroupState>(
         builder: (context, state) {
-          if (state is EmptyGroup) {
-            return SizedBox.shrink();
-          } else {
+          if(state is GroupChanged) {
             return IconButton(
               icon: const Icon(Icons.add),
               onPressed: () {
                 Navigator.pushNamed(context, '/topic/new_topic');
               },
             );
+          } else {
+            return SizedBox.shrink();
           }
         }
       )
     ],
   }, {
-    'title': Text('成员'),
+    'title': Text('社区'),
     'child': Contacts(),
     'actions': [
-      IconButton(
-        icon: const Icon(Icons.add),
-        onPressed: () {
-          Navigator.pushNamed(context, '/contacts/join_group');
-        },
+      BlocBuilder<GroupBloc, GroupState>(
+        builder: (context, state) {
+          if(state is GroupChanged) {
+            return IconButton(
+              icon: const Icon(Icons.add),
+              onPressed: () {
+                Navigator.pushNamed(context, '/contacts/join_group');
+              },
+            );
+          } else {
+            return SizedBox.shrink();
+          }
+        }
       )
     ]
   }, {
-    'title': Text('我的'),
+    'title': Text('我'),
     'child': Mine(),
     'actions': [
       SizedBox.shrink()

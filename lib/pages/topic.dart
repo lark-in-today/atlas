@@ -25,10 +25,10 @@ class Topic extends StatelessWidget {
         child: Column(
           children: <Widget>[
             _title(context, title, content),
-            Divider(),
-            _comments(comments),
-            Divider(),
-            _comment(context, id)
+            // Divider(),
+            // _comments(comments),
+            // Divider(),
+            // _comment(context, id)
           ]
         )
       )
@@ -67,47 +67,47 @@ Widget _content(String str) {
   );
 }
 
-// topic comments
-Widget _comments(List<dynamic> entries) {
-  return Expanded(
-    child: ListView.separated(
-      itemCount: entries.length,
-      itemBuilder: (BuildContext context, int index) {
-        return Card(
-          child: Container(
-            padding: EdgeInsets.all(10.0),
-            child: Center(child: Text('${entries[index]}')),
-          ),
-        );
-      },
-      separatorBuilder: (BuildContext context, int index) => const Divider(),
-    ),
-  );
-}
-
-// new comment
-Widget _comment(BuildContext context, String id) {
-  return GestureDetector(             
-    child: InkWell(
-      onTap: () {
-        Navigator.pushNamed(
-          context, '/topic/topic/comment',
-          arguments: CommentArgs(id: id)
-        );
-      },
-      child: Container(
-        margin: EdgeInsets.only(top: 3.0),
-        padding: EdgeInsets.symmetric(
-          horizontal: 8.0
-        ),
-        child: Text(
-          '发布新评论',
-          textAlign: TextAlign.center,
-          style: TextStyle(
-            color: Theme.of(context).primaryColor
-          )
-        ),
-      ),
-    )
-  );
-}
+// // topic comments
+// Widget _comments(List<dynamic> entries) {
+//   return Expanded(
+//     child: ListView.separated(
+//       itemCount: entries.length,
+//       itemBuilder: (BuildContext context, int index) {
+//         return Card(
+//           child: Container(
+//             padding: EdgeInsets.all(10.0),
+//             child: Center(child: Text('${entries[index]}')),
+//           ),
+//         );
+//       },
+//       separatorBuilder: (BuildContext context, int index) => const Divider(),
+//     ),
+//   );
+// }
+// 
+// // new comment
+// Widget _comment(BuildContext context, String id) {
+//   return GestureDetector(             
+//     child: InkWell(
+//       onTap: () {
+//         Navigator.pushNamed(
+//           context, '/topic/topic/comment',
+//           arguments: CommentArgs(id: id)
+//         );
+//       },
+//       child: Container(
+//         margin: EdgeInsets.only(top: 3.0),
+//         padding: EdgeInsets.symmetric(
+//           horizontal: 8.0
+//         ),
+//         child: Text(
+//           '发布新评论',
+//           textAlign: TextAlign.center,
+//           style: TextStyle(
+//             color: Theme.of(context).primaryColor
+//           )
+//         ),
+//       ),
+//     )
+//   );
+// }

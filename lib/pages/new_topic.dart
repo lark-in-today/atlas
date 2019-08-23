@@ -25,7 +25,7 @@ class _NewTopicState extends State<NewTopic> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('新建话题'),
+        title: Text('发表'),
         actions: <Widget>[submit(context, _title, _content)],
       ),
       body: Container(
@@ -39,7 +39,7 @@ class _NewTopicState extends State<NewTopic> {
             TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: '话题',
+                labelText: '标题',
               ),
               minLines: 3,
               maxLines: 3,
@@ -49,7 +49,7 @@ class _NewTopicState extends State<NewTopic> {
             TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: '描述',
+                labelText: '内容',
               ),
               minLines: 5,
               maxLines: 5,

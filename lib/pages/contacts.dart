@@ -34,7 +34,7 @@ Widget column(BuildContext context, dynamic state) {
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: <Widget>[
       cg(context),
-      line(context, '团队信息', '/contacts/group_info'),
+      line(context, '社区信息', '/contacts/group_info'),
       Expanded(child: contactList(state.members))
     ]
   );
@@ -48,7 +48,7 @@ Widget cg(BuildContext context) {
         if (state.tel == '') {
           return SizedBox.shrink();
         }
-        return line(context, '切换团队', '/contacts/change_group');
+        return line(context, '切换社区', '/contacts/change_group');
       }
       return SizedBox.shrink();
     }
