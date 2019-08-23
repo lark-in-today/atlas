@@ -37,23 +37,20 @@ Widget settings(BuildContext context, dynamic info) {
       index: 'name'
     ),
     ModifyArgs(
-      title: '手机号',
-      index: 'tel'
-    ),
-    ModifyArgs(
       title: '邮箱',
       index: 'mail'
     )
   ];
 
   Map _info = {
-    'mail': info.mail, 'name': info.name, 'tel': info.tel
+    'mail': info.mail,
+    'name': info.name
   };
 
   // if user not login;
   if (info.tel == '') {
-    titles = <ModifyArgs>[ModifyArgs(title: '手机号', index: 'tel')];
-    _info = { 'tel': info.tel };
+    titles = <ModifyArgs>[ModifyArgs(title: '邮箱', index: 'mail')];
+    _info = { 'mail': info.mail };
   }
   
   return ListView.builder(

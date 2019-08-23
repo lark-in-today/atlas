@@ -7,19 +7,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 abstract class RegisterEvent extends Equatable {}
 
 class SendCode extends RegisterEvent {
-  final String tel;
-  SendCode({this.tel});
+  final String mail;
+  SendCode({this.mail});
 }
 
 class VerifyCode extends RegisterEvent {
-  final String tel;
+  final String mail;
   final String code;
-  VerifyCode({this.tel, this.code});
+  VerifyCode({this.mail, this.code});
 }
 
 class Register extends RegisterEvent {
-  final String tel;
-  Register({this.tel});
+  final String mail;
+  Register({this.mail});
   
   @override
   String toString() => 'Register';
@@ -41,8 +41,8 @@ class None extends RegisterState {
 }
 
 class SentCode extends RegisterState {
-  final String tel;
-  SentCode({ this.tel }) : super([ tel ]);
+  final String mail;
+  SentCode({ this.mail }) : super([ mail ]);
   
   @override
   String toString() => 'SentCode';
@@ -64,14 +64,14 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   @override
   Stream<RegisterState> mapEventToState(RegisterEvent event) async* {
     if (event is SendCode) {
-      await userSms(event.tel);
-      yield SentCode(tel: event.tel);
+      await userSms(event.mail);
+      yield SentCode(mail: event.mail);
     } else if(event is VerifyCode) {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      UserSmsVerify res = await userSmsVerify(event.tel, event.code);
+      UserSmsVerify res = await userSmsVerify(event.mail, event.code);
 
       prefs.setString('token', res.token);
-      prefs.setString('tel', event.tel);
+      prefs.setString('mail', event.mail);
 
       yield Completed(token: res.token);
     } else if(event is StopRegister) {

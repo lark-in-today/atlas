@@ -46,7 +46,7 @@ Widget ok(BuildContext context, String value) {
   return BlocBuilder<RegisterBloc, RegisterState>(
     builder: (context, state) {
       if (state is SentCode) {
-        return _ok(context, state.tel, value);
+        return _ok(context, state.mail, value);
       } else {
         return SizedBox.shrink();
       }
@@ -54,13 +54,13 @@ Widget ok(BuildContext context, String value) {
   );
 }
 
-Widget _ok(BuildContext context, String tel, String value) {
+Widget _ok(BuildContext context, String mail, String value) {
   RegisterBloc _registerBloc = BlocProvider.of<RegisterBloc>(context);
   return Container(
     child: IconButton(
       icon: Icon(Icons.check),
       onPressed: () {
-        _registerBloc.dispatch(VerifyCode(tel: tel, code: value));
+        _registerBloc.dispatch(VerifyCode(mail: mail, code: value));
         Navigator.pushNamedAndRemoveUntil(
           context, '/init', (_) => false,
           arguments: RootArgs(

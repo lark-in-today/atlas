@@ -52,8 +52,8 @@ class _ModifyState extends State<Modify> {
 Widget ok(BuildContext context, String index, String value) {
   return BlocBuilder<RegisterBloc, RegisterState>(
     builder: (context, state) {
-      if (index == 'tel') {
-        return _tel(context, index, value);
+      if (index == 'mail') {
+        return _mail(context, index, value);
       }
       return _modify(context, index, value);
     }
@@ -81,13 +81,13 @@ Widget _modify(BuildContext context, String index, String value) {
   );
 }
 
-Widget _tel(BuildContext context, String index, String value) {
+Widget _mail(BuildContext context, String index, String value) {
   RegisterBloc _registerBloc = BlocProvider.of<RegisterBloc>(context);
   return Container(
     child: IconButton(
       icon: Icon(Icons.check),
       onPressed: () {
-        _registerBloc.dispatch(SendCode(tel: value));
+        _registerBloc.dispatch(SendCode(mail: value));
         Navigator.pushNamed(context, '/mine/modify/sms');
       }
     ),
